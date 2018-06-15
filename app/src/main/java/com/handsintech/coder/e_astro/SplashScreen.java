@@ -15,8 +15,8 @@ public class SplashScreen extends AppCompatActivity {
 
 
 
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+       // requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -25,7 +25,7 @@ public class SplashScreen extends AppCompatActivity {
 //a1=getActionBar();
         //       a1.hide();
 
-        // getSupportActionBar().hide();
+         getSupportActionBar().hide();
 
 
 

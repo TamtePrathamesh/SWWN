@@ -7,6 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorBackgroundFloating"
+    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+
+    style="@style/AppTheme.NoActionBar"
     >
 
     <ImageView
