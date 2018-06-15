@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
-
+//mYADAPTER
 public class MyAdapter extends PagerAdapter {
 
     private ArrayList<Integer> images;

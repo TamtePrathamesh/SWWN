@@ -11,4 +11,7 @@
         android:layout_gravity="center"
         android:src="@drawable/intro2"
         android:scaleType="centerCrop"/>
+
+
+
 </FrameLayout>
