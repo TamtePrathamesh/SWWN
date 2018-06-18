@@ -1,13 +1,11 @@
 package com.handsintech.coder.e_astro;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        init();
-    }
 
+    init();
+    }
     private void init() {
         for(int i=0;i<XMEN.length;i++)
             XMENArray.add(XMEN[i]);
@@ -60,13 +58,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 handler.post(Update);
             }
-        }, 3000, 3000);
-    }
-
-    public void gotoSignIn(View v){
-        Intent login = new Intent(this,login_activity.class);
-        startActivity(login);
-
+        }, 2500, 2500);
     }
 
 }
