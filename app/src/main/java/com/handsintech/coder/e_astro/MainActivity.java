@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private static final Integer[] XMEN= {R.drawable.intro2,R.drawable.intro3,R.drawable.intro4,R.drawable.intro5,R.drawable.intro6};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

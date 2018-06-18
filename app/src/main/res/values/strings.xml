@@ -3,6 +3,8 @@
 
     <string name="splashhome">EAstro</string>
     <string name="cmpName">Hands In Tech</string>
+    <string name="button">User Login</string>
+    <string name="expert_login">Expert Login</string>
 
 
 </resources>
