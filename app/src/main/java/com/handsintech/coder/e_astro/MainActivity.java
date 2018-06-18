@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-init();
+    init();
     }
     private void init() {
         for(int i=0;i<XMEN.length;i++)
