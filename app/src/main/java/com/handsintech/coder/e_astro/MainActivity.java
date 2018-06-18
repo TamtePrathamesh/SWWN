@@ -17,7 +17,7 @@ import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
-//mAINaCTIVITY
+//MAINaCTIVITY
 public class MainActivity extends AppCompatActivity {
 
     private static ViewPager mPager;
