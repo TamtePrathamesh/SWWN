@@ -24,6 +24,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import es.dmoral.toasty.Toasty;
+
 public class RegisterActivity extends Activity {
     RadioButton rb1,rb2;
 
@@ -99,7 +101,7 @@ public class RegisterActivity extends Activity {
                 if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()&&!phoneno.isEmpty()) {
                     registerUser(name, email, password,country,phoneno,gender);
                 } else {
-                    Toast.makeText(getApplicationContext(),
+                    Toasty.error(getApplicationContext(),
                             "Please enter your details!", Toast.LENGTH_LONG)
                             .show();
                 }
@@ -161,7 +163,7 @@ public class RegisterActivity extends Activity {
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at);
 
-                        Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
+                        Toasty.success(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
                             Log.d("fbi","check");
                         // Launch login activity
                         Intent intent = new Intent(

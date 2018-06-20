@@ -3,7 +3,9 @@ package com.handsintech.coder.e_astro;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.Properties;
@@ -21,12 +23,13 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
     //Declaring Variables
     private Context context;
     private Session session;
-    ForgotPassword fp=new ForgotPassword();
+
     //Information to send email
     private String email;
     private String subject;
     private String message;
-
+    public  String flag="";
+    public ForgotPassword fp;
     //Progressdialog to show while sending email
     private ProgressDialog progressDialog;
     String URL_LOGIN = "https://handsin.000webhostapp.com/PROJECT_HOME/reset_password.php";
@@ -53,7 +56,12 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
         //Dismissing the progress dialog
         progressDialog.dismiss();
         //Showing a success message
+        fp=new ForgotPassword();
         Toast.makeText(context,"Mail Sent please check your mail box",Toast.LENGTH_LONG).show();
+        flag="1";
+//        Log.d("tra",fp.flag);
+
+
     }
 
     @Override
@@ -99,4 +107,5 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
         }
         return null;
     }
+
 }

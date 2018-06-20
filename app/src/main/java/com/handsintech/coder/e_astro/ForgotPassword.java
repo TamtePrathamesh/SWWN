@@ -8,17 +8,21 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import javax.mail.Session;
 
 public class ForgotPassword extends AppCompatActivity {
 
-    EditText entermailforgot;
-    Button sendmailforgot;
+    public EditText entermailforgot;
+    public Button sendmailforgot;
     public  String email="";
     ProgressDialog pd;
     Session mSession=null;
+    public String flag="0";
+    public TextView stausEmail;
+    public SendMail sm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +33,7 @@ public class ForgotPassword extends AppCompatActivity {
 
         entermailforgot=findViewById(R.id.editTextEmailForgot);
         sendmailforgot=findViewById(R.id.buttonSendmailforgot);
+        stausEmail=findViewById(R.id.textViewStatus);
 
         sendmailforgot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,15 +67,37 @@ public class ForgotPassword extends AppCompatActivity {
 //                    pd.setTitle("Sending mail");
 //                    pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 //                    pd.setCancelable(false);
-                    SendMail sm = new SendMail(ForgotPassword.this, email);
+                    sm= new SendMail(ForgotPassword.this, email);
 
                     //Executing sendmail to send email
                     sm.execute();
+
                 }
+
 
             }
         });
+
     }
+
+    public  void hide()
+    {
+        if(sm.flag=="1")
+        {
+            entermailforgot.setVisibility(View.GONE);
+            sendmailforgot.setVisibility(View.GONE);
+             stausEmail.setVisibility(View.VISIBLE);
+             stausEmail.setText("Email has been sent to you");
+        }
+        else if(sm.flag=="0")
+        {
+            entermailforgot.setVisibility(View.GONE);
+            sendmailforgot.setVisibility(View.GONE);
+            stausEmail.setVisibility(View.VISIBLE);
+            stausEmail.setText("Email couldn't be sent to you");
+        }
+    }
+
 //    class RetriveFeedbackTesk extends AsyncTask<String,String,Void>
 //    {
 //        @Override
