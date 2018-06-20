@@ -4,20 +4,19 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.hbb20.CountryCodePicker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,92 +24,97 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends AppCompatActivity {
+public class RegisterActivity extends Activity {
+    RadioButton rb1,rb2;
 
-
-    private static Animation shakeAnimation;
-    private ConstraintLayout cl;
     private static final String TAG = RegisterActivity.class.getSimpleName();
-    private Button btnLogin;
-    private Button btnLinkToRegister,btnforgotpassword;
+    private Button btnRegister;
+    private Button btnLinkToLogin;
+    private EditText inputFullName;
     private EditText inputEmail;
-    private EditText inputPassword;
+    private EditText inputPassword,editTextphone;
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandler db;
-    String URL_LOGIN = "http://handintech.000webhostapp.com/NEW_HIT/login.php";
+    CountryCodePicker cpp;
+    public static String URL_REGISTER = "http://handintech.000webhostapp.com/NEW_HIT/register.php";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
 
-        getSupportActionBar().hide();
+        rb1=findViewById(R.id.Male);
+        rb2=findViewById(R.id.Female);
 
+
+        cpp=findViewById(R.id.ccp);
+        inputFullName = (EditText) findViewById(R.id.inputname);
         inputEmail = (EditText) findViewById(R.id.inputemail);
         inputPassword = (EditText) findViewById(R.id.inputpass);
-        btnLogin = (Button) findViewById(R.id.loginbtn);
-        btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
-        btnforgotpassword=findViewById(R.id.btnforgotpassword);
+        btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
+        editTextphone=findViewById(R.id.inputphone);
 
-        cl=findViewById(R.id.loginConstraint);
+
+
+
+
+
+
         // Progress dialog
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
-        // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
-
         // Session manager
         session = new SessionManager(getApplicationContext());
-        shakeAnimation = AnimationUtils.loadAnimation(getApplication(),R.anim.shake);
+
+        // SQLite database handler
+        db = new SQLiteHandler(getApplicationContext());
 
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
-            Intent intent = new Intent(LoginActivity.this, Home.class);
+            Intent intent = new Intent(RegisterActivity.this,
+                    MainActivity.class);
             startActivity(intent);
             finish();
         }
 
-        // Login button Click Event
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-
+        // Register Button Click event
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                String gender="";
+                if(rb1.isChecked())
+                    gender="Male";
+                else
+                    gender="Female";
+
+                String name = inputFullName.getText().toString().trim();
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
+                String country=cpp.getSelectedCountryName().toString();
+                String phoneno=editTextphone.getText().toString();
 
-                // Check for empty data in the form
-                if (!email.isEmpty() && !password.isEmpty()) {
-                    // login user
-                    checkLogin(email, password);
+
+                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()&&!phoneno.isEmpty()) {
+                    registerUser(name, email, password,country,phoneno,gender);
                 } else {
-                    // Prompt user to enter credentials
-                    cl.startAnimation(shakeAnimation);
                     Toast.makeText(getApplicationContext(),
-                            "Please enter the credentials!", Toast.LENGTH_LONG)
+                            "Please enter your details!", Toast.LENGTH_LONG)
                             .show();
                 }
             }
-
         });
 
-        // Link to Register Screen
-        btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
+        // Link to Login Screen
+        btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
-                        RegisterActivity.class);
-                overridePendingTransition(R.anim.rightenter, R.anim.leftexit);
+                        LoginActivity.class);
+                overridePendingTransition(R.anim.leftenter, R.anim.rightexit);
                 startActivity(i);
 
-            }
-        });
-
-        btnforgotpassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                overridePendingTransition(R.anim.rightenter, R.anim.leftexit);
-                startActivity(new Intent(LoginActivity.this,ForgotPassword.class));
 
             }
         });
@@ -119,60 +123,63 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * function to verify login details in mysql db
+     * Function to store user in MySQL database will post params(tag, name,
+     * email, password) to register url
      * */
-    private void checkLogin(final String email, final String password) {
+    private void registerUser(final String name, final String email,
+                              final String password,final String country,final String phoneno,final String gender) {
         // Tag used to cancel the request
-        String tag_string_req = "req_login";
+        String tag_string_req = "req_register";
 
-        pDialog.setMessage("Logging in ...");
+        pDialog.setMessage("Registering ...");
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                URL_LOGIN, new Response.Listener<String>() {
+                URL_REGISTER, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Login Response: " + response.toString());
+                Log.d(TAG, "Register Response: " + response.toString());
                 hideDialog();
 
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
-
-                    // Check for error node in json
                     if (!error) {
-                        // user successfully logged in
-                        // Create login session
-                        session.setLogin(true);
-
-                        // Now store the user in SQLite
+                        // User successfully stored in MySQL
+                        // Now store the user in sqlite
                         String uid = jObj.getString("uid");
 
                         JSONObject user = jObj.getJSONObject("user");
                         String name = user.getString("name");
                         String email = user.getString("email");
+
                         String created_at = user
                                 .getString("created_at");
+
 
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at);
 
-                        // Launch main activity
-                        Intent intent = new Intent(LoginActivity.this,
+                        Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
+                            Log.d("fbi","check");
+                        // Launch login activity
+                        Intent intent = new Intent(
+                                RegisterActivity.this,
                                 Home.class);
                         startActivity(intent);
 
+
                     } else {
-                        // Error in login. Get the error message
+
+                        // Error occurred in registration. Get the error
+                        // message
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getApplicationContext(),
                                 errorMsg, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
-                    // JSON error
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -180,7 +187,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Login Error: " + error.getMessage());
+                Log.e(TAG, "Registration Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();
@@ -189,10 +196,14 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             protected Map<String, String> getParams() {
-                // Posting parameters to login url
+                // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
+                params.put("name", name);
                 params.put("email", email);
                 params.put("password", password);
+                params.put("country",country);
+                params.put("phoneno",phoneno);
+                params.put("gender",gender);
 
                 return params;
             }
@@ -212,12 +223,10 @@ public class LoginActivity extends AppCompatActivity {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
-
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
         super.startActivityForResult(intent, requestCode);
-        overridePendingTransition(R.anim.rightenter, R.anim.leftexit);
+        overridePendingTransition(R.anim.leftenter, R.anim.rightexit);
 
     }
-
 }

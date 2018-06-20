@@ -1,11 +1,14 @@
 package com.handsintech.coder.e_astro;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,8 @@ import me.relex.circleindicator.CircleIndicator;
 //MAINaCTIVITYs
 public class MainActivity extends AppCompatActivity {
 
+    Button btnUserlogin;
+    private SessionManager session;
     private static ViewPager mPager;
     private static int currentPage = 0;
     private static final Integer[] XMEN= {R.drawable.intro2,R.drawable.intro3,R.drawable.intro4,R.drawable.intro5,R.drawable.intro6};
@@ -30,6 +35,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+        session = new SessionManager(getApplicationContext());
+        // Check if user is already logged in or not
+        if (session.isLoggedIn()) {
+            // User is already logged in. Take him to main activity
+            Intent intent = new Intent(MainActivity.this, Home.class);
+            startActivity(intent);
+            finish();
+        }
+
+
+        btnUserlogin=findViewById(R.id.buttonUserlogin);
+
+        btnUserlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+            }
+        });
 
     init();
     }
