@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
 
         inputEmail = (EditText) findViewById(R.id.inputemail);
         inputPassword = (EditText) findViewById(R.id.inputpass);
@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                             "Please enter the credentials!", Toast.LENGTH_LONG)
                             .show();
                 }
+
             }
 
         });

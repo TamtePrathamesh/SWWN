@@ -28,7 +28,7 @@ public class ForgotPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        getSupportActionBar().hide();
+      //  getSupportActionBar().hide();
         pd=new ProgressDialog(this);
 
         entermailforgot=findViewById(R.id.editTextEmailForgot);

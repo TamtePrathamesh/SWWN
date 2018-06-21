@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+    android:id="@+id/Home"
+    android:title="Home"
+    android:icon="@drawable/ic_home_black_24dp">
+
+    </item>
+
+<item
+android:id="@+id/Ask"
+android:title="Ask"
+android:icon="@drawable/ask_icon">
+    </item>
+    <item
+        android:id="@+id/Messages"
+        android:title="Messages"
+        android:icon="@drawable/message_icon">
+    </item>
+    <item
+        android:id="@+id/Prod_desc"
+        android:title="Product Description"
+        android:icon="@drawable/product_icon">
+    </item>
+
+
+</menu>

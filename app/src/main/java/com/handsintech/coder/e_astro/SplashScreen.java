@@ -25,10 +25,7 @@ public class SplashScreen extends AppCompatActivity {
 //a1=getActionBar();
         //       a1.hide();
 
-         getSupportActionBar().hide();
-
-
-
+//         getSupportActionBar().hide();
         // getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         // getActionBar().hide();
         Thread myThread =new Thread(){

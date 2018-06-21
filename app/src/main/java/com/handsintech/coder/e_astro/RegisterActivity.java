@@ -60,9 +60,6 @@ public class RegisterActivity extends Activity {
 
 
 
-
-
-
         // Progress dialog
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);

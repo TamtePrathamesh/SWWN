@@ -32,7 +32,6 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
     public ForgotPassword fp;
     //Progressdialog to show while sending email
     private ProgressDialog progressDialog;
-    String URL_LOGIN = "https://handsin.000webhostapp.com/PROJECT_HOME/reset_password.php";
     //Class Constructor
     public SendMail(Context context, String email){
         //Initializing variables
@@ -97,7 +96,7 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
             //Adding subject
             mm.setSubject("Hands In Tech");
             //Adding message
-            mm.setText("https://handintech.000webhostapp.com/NEW_HIT/user_valid_check.php?email="+email);
+            mm.setText("<div> <p>click this link to change password-><br><a href='https://handintech.000webhostapp.com/NEW_HIT/user_valid_check.php?email="+email+"'>click here</a><p> </div>");
 
             //Sending email
             Transport.send(mm);
