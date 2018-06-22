@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -26,7 +29,10 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 
-public class RegisterActivity extends Activity {
+public class RegisterActivity extends AppCompatActivity {
+
+    MainActivity ma=new MainActivity();
+    public TextView tvstatusReg;
     RadioButton rb1,rb2;
 
     private static final String TAG = RegisterActivity.class.getSimpleName();
@@ -39,11 +45,15 @@ public class RegisterActivity extends Activity {
     private SessionManager session;
     private SQLiteHandler db;
     CountryCodePicker cpp;
+    public String msg;
     public static String URL_REGISTER = "http://handintech.000webhostapp.com/NEW_HIT/register.php";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        tvstatusReg=findViewById(R.id.textViewStatusRegister);
+
+
 
         rb1=findViewById(R.id.Male);
         rb2=findViewById(R.id.Female);
@@ -95,11 +105,18 @@ public class RegisterActivity extends Activity {
                 String phoneno=editTextphone.getText().toString();
 
 
-                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()&&!phoneno.isEmpty()) {
+                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()&&!phoneno.isEmpty()&&Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     registerUser(name, email, password,country,phoneno,gender);
-                } else {
+                }
+                else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+                {
+                    inputEmail.setError("enter valid email");
+                }
+                else if(phoneno.length()<10){editTextphone.setError("enter 10 digit number");}
+
+                else {
                     Toasty.error(getApplicationContext(),
-                            "Please enter your details!", Toast.LENGTH_LONG)
+                            "Please enter all fields!", Toast.LENGTH_LONG)
                             .show();
                 }
             }
@@ -109,13 +126,17 @@ public class RegisterActivity extends Activity {
         btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),
+                Intent i = new Intent(RegisterActivity.this,
                         LoginActivity.class);
                 overridePendingTransition(R.anim.leftenter, R.anim.rightexit);
-                startActivity(i);
+
+                    startActivity(i);
+                }
 
 
-            }
+
+
+
         });
 
 
@@ -160,14 +181,10 @@ public class RegisterActivity extends Activity {
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at);
 
-                        Toasty.success(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
-                            Log.d("fbi","check");
-                        // Launch login activity
-                        Intent intent = new Intent(
-                                RegisterActivity.this,
-                                Home.class);
-                        startActivity(intent);
+                        Toasty.success(RegisterActivity.this, "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
 
+                        // Launch login activity
+                       startActivity(new Intent(RegisterActivity.this,Home.class));
 
                     } else {
 
@@ -187,8 +204,8 @@ public class RegisterActivity extends Activity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Registration Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                Toasty.error(RegisterActivity.this,"check your network connection",
+                         Toast.LENGTH_LONG).show();
                 hideDialog();
             }
         }) {

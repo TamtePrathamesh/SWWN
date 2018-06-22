@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,7 +14,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -33,48 +34,43 @@ public class Home extends AppCompatActivity
        db=new SQLiteHandler(getApplicationContext());
        session=new SessionManager(getApplicationContext());
         setSupportActionBar(toolbar);
-        BottomNavigationView bm = (BottomNavigationView) findViewById(R.id.bottom_nev);
+        BottomNavigationView bm = (BottomNavigationView) findViewById(R.id.navigation);
         bm.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        //Fragment selectedFragment = null;
-                        // FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
                         switch (item.getItemId()) {
-                            case R.id.Home:
-
-                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new home1()).commit();
-
-                                break;
-                            case R.id.Ask:
-
-                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new ask()).commit();
-
-                                break;
-                            case R.id.Messages:
-
-                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new messages()).commit();
+                            case R.id.navigation_home:
+                                FragmentManager fragmentManager = getSupportFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.frame_layout, new fragment_new_Home());
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                               // getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
 
                                 break;
-                            case R.id.Prod_desc:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new product_desc()).commit();
+                            case R.id.navigation_ask:
+
+                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
+
+                                break;
+                            case R.id.navigation_messages:
+
+                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
+
+                                break;
+                            case R.id.navigation_product_details:
+                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new BlankFragment()).commit();
 
                         }
 
                         return true;
                     }
                 });
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new home1()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
         ;
-//
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -90,30 +86,9 @@ public class Home extends AppCompatActivity
          navheader_email=header.findViewById(R.id.drawer_layout_email);
 
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
 
 
 
-        // session manager
         session = new SessionManager(getApplicationContext());
 
         if (!session.isLoggedIn()) {
@@ -130,71 +105,33 @@ public class Home extends AppCompatActivity
         navheadername.setText(name);
         navheader_email.setText(email);
 
-        // Logout button click event
-//        btnLogout.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                logoutUser();
-//            }
-//        });
-//    }
 
-        /**
-         * Logging out the user. Will set isLoggedIn flag to false in shared
-         * preferences Clears the user data from sqlite users table
-         * */
     }
 
-//    @SuppressWarnings("StatementWithEmptyBody")
-//    @Override
-//    public boolean onNavigationItemSelected (MenuItem item){
-//        // Handle navigation view item clicks here.
-//        int id = item.getItemId();
-//
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
-//
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
-//        return true;
-//    }
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.Home:
+    public boolean onNavigationItemSelected (MenuItem item){
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new home1()).commit();
-                ;
-                break;
-            case R.id.Ask:
+        if (id == R.id.nav_camera) {
+            logoutUser();
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new ask()).commit();
-                ;
-                break;
-            case R.id.Messages:
+        } else if (id == R.id.nav_gallery) {
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new messages()).commit();
-                ;
-                break;
-            case R.id.Prod_desc:
-                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new product_desc()).commit();
-            case R.id.nav_camera:
-                    logoutUser();
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
 
         }
 
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 

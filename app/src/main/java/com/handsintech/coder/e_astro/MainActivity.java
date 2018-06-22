@@ -1,7 +1,6 @@
 package com.handsintech.coder.e_astro;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -21,7 +20,7 @@ import me.relex.circleindicator.CircleIndicator;
 //MAINaCTIVITYs
 public class MainActivity extends AppCompatActivity {
 
-    Button btnUserlogin;
+    Button btnUserlogin,btnExpertLogin;
     private SessionManager session;
     private static ViewPager mPager;
     private static int currentPage = 0;
@@ -29,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 //        getSupportActionBar().hide();
         session = new SessionManager(getApplicationContext());
@@ -46,11 +45,24 @@ public class MainActivity extends AppCompatActivity {
 
 
         btnUserlogin=findViewById(R.id.buttonUserlogin);
+        btnExpertLogin=findViewById(R.id.buttonExpertlogin);
 
         btnUserlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                Intent i=new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(i);
+
+            }
+        });
+
+        btnExpertLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(MainActivity.this,LoginActivity.class);
+
+                startActivity(i);
+
             }
         });
 
