@@ -1,14 +1,18 @@
 package com.handsintech.coder.e_astro;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -23,17 +27,20 @@ public class Home extends AppCompatActivity
     SQLiteHandler db;
     Toolbar toolbar;
     SessionManager session;
+    DrawerLayout dl;
     TextView navheadername,navheader_email;
     BottomNavigationView bm;
+    Snackbar snackbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // getSupportActionBar().hide();
+        // getSupportActionBar().hide();
         setContentView(R.layout.activity_home);
-       toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-       db=new SQLiteHandler(getApplicationContext());
-       session=new SessionManager(getApplicationContext());
+        db = new SQLiteHandler(getApplicationContext());
+        dl=findViewById(R.id.drawer_layout);//using this ID for displaying SnackBar
+        session = new SessionManager(getApplicationContext());
         setSupportActionBar(toolbar);
 //       getActionBar().setDisplayHomeAsUpEnabled(true);
         bm = (BottomNavigationView) findViewById(R.id.navigation);
@@ -45,7 +52,7 @@ public class Home extends AppCompatActivity
                         switch (item.getItemId()) {
                             case R.id.navigation_home:
 
-                               getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
 
                                 break;
                             case R.id.navigation_ask:
@@ -69,7 +76,6 @@ public class Home extends AppCompatActivity
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
 
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -79,12 +85,9 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        View header=navigationView.getHeaderView(0);
-         navheadername=header.findViewById(R.id.drawer_layout_name);
-         navheader_email=header.findViewById(R.id.drawer_layout_email);
-
-
-
+        View header = navigationView.getHeaderView(0);
+        navheadername = header.findViewById(R.id.drawer_layout_name);
+        navheader_email = header.findViewById(R.id.drawer_layout_email);
 
 
         session = new SessionManager(getApplicationContext());
@@ -104,6 +107,22 @@ public class Home extends AppCompatActivity
         navheader_email.setText(email);
 
 
+        if (!EveryTimeRequied.getInstance(Home.this).isNetworkAvailable()) {
+
+            snackbar = Snackbar
+                    .make(dl, "No internet connection!", Snackbar.LENGTH_LONG)
+                    .setAction("Dismiss", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            snackbar.dismiss();
+                        }
+                    });
+
+// Changing message text color
+            snackbar.setActionTextColor(Color.RED);
+            snackbar.show();
+
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
