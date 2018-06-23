@@ -19,11 +19,12 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     SQLiteHandler db;
     Toolbar toolbar;
     SessionManager session;
     TextView navheadername,navheader_email;
+    BottomNavigationView bm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,8 @@ public class Home extends AppCompatActivity
        db=new SQLiteHandler(getApplicationContext());
        session=new SessionManager(getApplicationContext());
         setSupportActionBar(toolbar);
-        BottomNavigationView bm = (BottomNavigationView) findViewById(R.id.navigation);
+//       getActionBar().setDisplayHomeAsUpEnabled(true);
+        bm = (BottomNavigationView) findViewById(R.id.navigation);
         bm.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -42,12 +44,8 @@ public class Home extends AppCompatActivity
 
                         switch (item.getItemId()) {
                             case R.id.navigation_home:
-                                FragmentManager fragmentManager = getSupportFragmentManager();
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.frame_layout, new fragment_new_Home());
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.commit();
-                               // getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
+
+                               getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
 
                                 break;
                             case R.id.navigation_ask:
@@ -69,7 +67,7 @@ public class Home extends AppCompatActivity
                     }
                 });
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
-        ;
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -114,6 +112,7 @@ public class Home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+
         if (id == R.id.nav_camera) {
             logoutUser();
 
@@ -155,6 +154,17 @@ public class Home extends AppCompatActivity
         startActivity(intent);
         finish();
     }
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//
+//
+//             bm = (BottomNavigationView) findViewById(R.id.navigation);
+//
+//
+//
+//    }
 }
 
 

@@ -178,6 +178,11 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
+
+
+                //
+                //
+
             }
         }, new Response.ErrorListener() {
 
