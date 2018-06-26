@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -40,11 +41,30 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandler db;
-    String URL_LOGIN = "http://handintech.000webhostapp.com/NEW_HIT/login.php";
+    private TextView tvstatus;
+    String s;
+    String URL_LOGIN = "http://handintech.000webhostapp.com/NEW_HIT/login.php?check=";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        tvstatus=findViewById(R.id.status);
+
+       s=getIntent().getStringExtra("check");
+
+        Log.d("info",s);
+
+        if(s.equals("user"))
+        {
+            tvstatus.setVisibility(View.VISIBLE);
+            tvstatus.setText("User Login");
+        }
+        else if(s.equals("expert"))
+        {
+            tvstatus.setVisibility(View.VISIBLE);
+            tvstatus.setText("Expert Login");
+        }
 
 //        getSupportActionBar().hide();
 
@@ -104,6 +124,11 @@ public class LoginActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(),
                         RegisterActivity.class);
                 overridePendingTransition(R.anim.rightenter, R.anim.leftexit);
+                if(s.equals("user"))
+                i.putExtra("check","user");
+                else if (s.equals("expert"))
+                i.putExtra("check","expert");
+
                 startActivity(i);
 
             }
@@ -132,7 +157,7 @@ public class LoginActivity extends AppCompatActivity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                URL_LOGIN, new Response.Listener<String>() {
+                URL_LOGIN+s, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -164,6 +189,12 @@ public class LoginActivity extends AppCompatActivity {
                         // Launch main activity
                         Intent intent = new Intent(LoginActivity.this,
                                 Home.class);
+                        if(s.equals("user")){
+
+                            SharedPref.getInstance(LoginActivity.this).UserRegiserted(true);}
+                        else if(s.equals("expert")){
+
+                            SharedPref.getInstance(LoginActivity.this).ExpertRegiserted(true);}
                         startActivity(intent);
 
                     } else {

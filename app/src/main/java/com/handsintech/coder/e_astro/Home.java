@@ -31,12 +31,17 @@ public class Home extends AppCompatActivity
     TextView navheadername,navheader_email;
     BottomNavigationView bm;
     Snackbar snackbar;
+    String s,temp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // getSupportActionBar().hide();
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+
+
 
         db = new SQLiteHandler(getApplicationContext());
         dl=findViewById(R.id.drawer_layout);//using this ID for displaying SnackBar
@@ -168,8 +173,18 @@ public class Home extends AppCompatActivity
 
         db.deleteUsers();
 
+
+
         // Launching the login activity
         Intent intent = new Intent(Home.this, LoginActivity.class);
+        if(SharedPref.getInstance(Home.this).IsUserRegiserted()){
+            SharedPref.getInstance(Home.this).UserRegiserted(false);
+            intent.putExtra("check","user");}
+        else if(SharedPref.getInstance(Home.this).IsexpertRegiserted()){
+            SharedPref.getInstance(Home.this).ExpertRegiserted(false);
+            intent.putExtra("check", "expert");
+
+        }
         startActivity(intent);
         finish();
     }

@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(MainActivity.this,LoginActivity.class);
+                i.putExtra("check","user");
                 startActivity(i);
 
             }
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(MainActivity.this,LoginActivity.class);
-
+                i.putExtra("check","expert");
                 startActivity(i);
 
             }

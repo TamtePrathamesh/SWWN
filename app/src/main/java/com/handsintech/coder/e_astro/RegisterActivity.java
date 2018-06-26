@@ -46,14 +46,25 @@ public class RegisterActivity extends AppCompatActivity {
     private SQLiteHandler db;
     CountryCodePicker cpp;
     public String msg;
-    public static String URL_REGISTER = "http://handintech.000webhostapp.com/NEW_HIT/register.php";
+    String s,check;
+    public static String URL_REGISTER = "http://handintech.000webhostapp.com/NEW_HIT/register.php?check=";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         tvstatusReg=findViewById(R.id.textViewStatusRegister);
 
+        s=getIntent().getStringExtra("check");
+        if(s.equals("user")){
+            tvstatusReg.setVisibility(View.VISIBLE);
+            tvstatusReg.setText("User Signup");
 
+        }
+        else if(s.equals("expert")){
+            tvstatusReg.setVisibility(View.VISIBLE);
+            tvstatusReg.setText("Expert Signup");
+
+        }
 
         rb1=findViewById(R.id.Male);
         rb2=findViewById(R.id.Female);
@@ -130,6 +141,11 @@ public class RegisterActivity extends AppCompatActivity {
                         LoginActivity.class);
                 overridePendingTransition(R.anim.leftenter, R.anim.rightexit);
 
+                if(s.equals("user"))
+                    i.putExtra("check","user");
+                else
+                    i.putExtra("check","expert");
+
                     startActivity(i);
                 }
 
@@ -146,6 +162,8 @@ public class RegisterActivity extends AppCompatActivity {
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
      * */
+
+
     private void registerUser(final String name, final String email,
                               final String password,final String country,final String phoneno,final String gender) {
         // Tag used to cancel the request
@@ -155,7 +173,7 @@ public class RegisterActivity extends AppCompatActivity {
         showDialog();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                URL_REGISTER, new Response.Listener<String>() {
+                URL_REGISTER+s, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -183,8 +201,21 @@ public class RegisterActivity extends AppCompatActivity {
 
                         Toasty.success(RegisterActivity.this, "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
 
+                        if(s.equals("expert"))
+                        {
+                            SharedPref.getInstance(RegisterActivity.this).ExpertRegiserted(true);
+                        }
+                        else if(s.equals("user"))
+                        {
+                            SharedPref.getInstance(RegisterActivity.this).UserRegiserted(true);
+                        }
+
                         // Launch login activity
-                       startActivity(new Intent(RegisterActivity.this,Home.class));
+                    Intent i=new Intent(RegisterActivity.this,LoginActivity.class);
+                    if(s.equals("user"))
+                    i.putExtra("check","user");
+                    else if(s.equals("expert"))
+                        i.putExtra("check","expert");
 
                     } else {
 
