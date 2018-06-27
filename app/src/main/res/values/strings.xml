@@ -33,7 +33,8 @@
 
 
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_dashboard">Ask</string>
+    <string name="title_notifications">Mail</string>
+    <string name="title_prodctdetails">Product Details</string>
 
 </resources>

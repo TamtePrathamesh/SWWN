@@ -45,7 +45,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         if (viewType == LIST_ITEM){
             itemView = LayoutInflater.from(mCtx).inflate( R.layout.products_single_items_view, null);
         }else{
-            itemView = LayoutInflater.from(mCtx).inflate(R.layout.item_grid_layout, null);
+            itemView = LayoutInflater.from(mCtx).inflate(R.layout.items_grid, null);
         }
         return new ProductViewHolder(itemView);
 
