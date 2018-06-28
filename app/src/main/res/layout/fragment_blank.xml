@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_new_Home">
+    tools:context=".fragment_new_Home"
+    android:layout_below="@+id/container">
 
 
 
@@ -14,17 +15,18 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/new_recylcerView"
+        android:id="@+id/brands_recylcerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_above="@+id/navigation"
+
 
 
         />
 
+
     <ProgressBar
-        android:id="@+id/new_pb"
+        android:id="@+id/brands_pb"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,5 +35,25 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="293dp" />
 
+    <ProgressBar
+        android:id="@+id/brands_pb1"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/brands_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|end"
+        android:visibility="gone"
+        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="33dp"
+        app:backgroundTint="#FF4081"
+        app:srcCompat="@drawable/fab_add" />
 </RelativeLayout>

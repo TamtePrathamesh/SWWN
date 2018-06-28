@@ -1,18 +1,14 @@
 package com.handsintech.coder.e_astro;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -57,7 +53,7 @@ public class Home extends AppCompatActivity
                         switch (item.getItemId()) {
                             case R.id.navigation_home:
 
-                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_HOME()).commit();
 
                                 break;
                             case R.id.navigation_ask:
@@ -71,14 +67,14 @@ public class Home extends AppCompatActivity
 
                                 break;
                             case R.id.navigation_product_details:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new BlankFragment()).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_brand()).commit();
 
                         }
 
                         return true;
                     }
                 });
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_HOME()).commit();
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
