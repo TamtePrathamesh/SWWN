@@ -1,11 +1,11 @@
 package com.handsintech.coder.e_astro;
 
 
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -26,7 +26,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.futuremind.recyclerviewfastscroll.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +39,9 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class fragment_brand extends Fragment  implements SearchView.OnQueryTextListener{
+    public RecyclerView catrecyclerView;
+    public RecyclerView.Adapter catadapter;
+    public List<listitems> list = new ArrayList<>();
 
     public FloatingActionButton fab;
 
@@ -47,15 +49,61 @@ public class fragment_brand extends Fragment  implements SearchView.OnQueryTextL
 
     List<Brands> brandList;
     View v;
-
+    int page=0;
     //the recyclerview
     RecyclerView recyclerView;
     String request_url = "http://handintech.000webhostapp.com/NEW_HIT/brands.php?start=";
-    int page=0;
+
 
     public static interface ClickListener{
         public void onClick(View view,int position);
         public void onLongClick(View view,int position);
+    }
+    public void catrecycler()
+    {
+        String request="http://handintech.000webhostapp.com/NEW_HIT/getcatagories.php";
+        catrecyclerView=(RecyclerView)v.findViewById(R.id.recycler_view);
+        catrecyclerView.setHasFixedSize(true);
+
+        catrecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+
+        StringRequest stringRequest= new StringRequest(Request.Method.GET, request,
+                new Response.Listener<String>() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onResponse(String response) {
+                        JSONArray json= null;
+                        try {
+                            json = new JSONArray(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
+                        }
+                        int i=json.length();
+                         Toast.makeText(getContext(),"response recieved with "+i+" results",Toast.LENGTH_LONG).show();
+                        for(int j=0;j<i;j++)
+                        {
+                            try {
+                                JSONObject jsonObject=json.getJSONObject(j);
+                                listitems l=new listitems(jsonObject.getString("categery"));
+                                list.add(l);
+                                Log.d("cat",jsonObject.getString("categery"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        catadapter=new catagoryAdapter(list,getContext());
+                        catrecyclerView.setAdapter(catadapter);
+                    }},
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        Volley.newRequestQueue(getContext()).add(stringRequest);
+
     }
 
 
@@ -68,9 +116,9 @@ public class fragment_brand extends Fragment  implements SearchView.OnQueryTextL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_blank, container, false);
-
-
+         v= inflater.inflate(R.layout.fragment_brand, container, false);
+        page=0;
+        catrecycler();
         pb=(ProgressBar)v.findViewById(R.id.brands_pb);
         pb1=(ProgressBar)v.findViewById(R.id.brands_pb1);
 
@@ -86,45 +134,6 @@ public class fragment_brand extends Fragment  implements SearchView.OnQueryTextL
         adapter = new BrandAdapter(getActivity(), brandList);
         recyclerView.setAdapter(adapter);
 
-//        fab = (FloatingActionButton)v. findViewById(R.id.brands_fab);
-//        fab.setVisibility(View.GONE);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-//        if(SharedPref.getInstance(getActivity()).IsexpertRegiserted())
-//        {
-//            Log.d("cq","true");
-////            fab.setVisibility(View.VISIBLE);
-////
-////            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-////                @Override
-////                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-////
-////                    if (newState == RecyclerView.SCROLL_STATE_IDLE){
-////                        fab.show();
-////                    }
-////
-////                    super.onScrollStateChanged(recyclerView, newState);
-////                }
-////
-////                @Override
-////                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-////                    super.onScrolled(recyclerView, dx, dy);
-////                    if (dy > 0 ||dy<0 && fab.isShown())
-////                        fab.hide();
-////                }
-//
-//            });
-//        }else {
-//            Log.d("cq","false");
-//            fab.setVisibility(View.GONE);
-//
-//        }
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
