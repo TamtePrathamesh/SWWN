@@ -41,7 +41,7 @@ import java.util.List;
 public class fragment_brand extends Fragment  implements SearchView.OnQueryTextListener{
     public RecyclerView catrecyclerView;
     public RecyclerView.Adapter catadapter;
-    public List<listitems> list = new ArrayList<>();
+    public List<listitems> list ;
 
     public FloatingActionButton fab;
 
@@ -60,7 +60,7 @@ public class fragment_brand extends Fragment  implements SearchView.OnQueryTextL
         public void onLongClick(View view,int position);
     }
     public void catrecycler()
-    {
+    {   list= new ArrayList<>();
         String request="http://handintech.000webhostapp.com/NEW_HIT/getcatagories.php";
         catrecyclerView=(RecyclerView)v.findViewById(R.id.recycler_view);
         catrecyclerView.setHasFixedSize(true);
