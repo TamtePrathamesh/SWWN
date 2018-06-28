@@ -19,7 +19,7 @@ public class fragment_HOME extends Fragment {
     private ViewPager mViewPager;
     View v;
 
-    fragment_brand fb = new fragment_brand();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,13 +67,13 @@ public class fragment_HOME extends Fragment {
 
             switch (position) {
                 case 0:
-
+                    fragment_brand fb = new fragment_brand();
                     return fb;
                 case 1:
                     product_details pd = new product_details();
                     return pd;
             }
-            return fb;
+            return null;
 
         }
 

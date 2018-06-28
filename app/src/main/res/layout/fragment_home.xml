@@ -7,6 +7,8 @@
     tools:context=".fragment_HOME">
 
 
+
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
         app:tabIndicatorColor="@color/colorPrimary"
