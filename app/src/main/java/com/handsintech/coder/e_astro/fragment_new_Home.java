@@ -61,6 +61,7 @@ public class fragment_new_Home extends Fragment implements SearchView.OnQueryTex
 
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         v= inflater.inflate(R.layout.fragment_new_home, container, false);

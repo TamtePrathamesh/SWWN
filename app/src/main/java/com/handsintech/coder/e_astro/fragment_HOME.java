@@ -19,7 +19,7 @@ public class fragment_HOME extends Fragment {
     private ViewPager mViewPager;
     View v;
 
-
+    fragment_brand fb = new fragment_brand();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,6 +33,25 @@ public class fragment_HOME extends Fragment {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                mViewPager.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mViewPager.getAdapter().notifyDataSetChanged();
+
+
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                mViewPager.getAdapter().notifyDataSetChanged();
+            }
+        });
 
         return v;
     }
@@ -48,31 +67,38 @@ public class fragment_HOME extends Fragment {
 
             switch (position) {
                 case 0:
-                    fragment_brand fb = new fragment_brand();
+
                     return fb;
                 case 1:
                     product_details pd = new product_details();
                     return pd;
             }
-            return null;
+            return fb;
 
         }
+
 
         @Override
         public int getCount() {
             // Show 3 total pages.
             return 2;
+
         }
+
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
+
                 case 0:
+
                     return "By Brands";
                 case 1:
                     return "By Products";
+
             }
             return null;
         }
     }
+
 }
