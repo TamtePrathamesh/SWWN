@@ -1,5 +1,8 @@
-package com.handsintech.coder.e_astro;
+package com.handsintech.coder.e_astro.Activites;
 
+
+
+import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -12,14 +15,24 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.handsintech.coder.e_astro.EveryTimeRequied;
+import com.handsintech.coder.e_astro.R;
+import com.handsintech.coder.e_astro.SQLiteHandler;
+import com.handsintech.coder.e_astro.SessionManager;
+import com.handsintech.coder.e_astro.SharedPref;
+import com.handsintech.coder.e_astro.fragment_HOME;
+import com.handsintech.coder.e_astro.fragment_brand;
+import com.handsintech.coder.e_astro.fragment_new_Home;
+
 import java.util.HashMap;
 
 public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener,FragmentManager.OnBackStackChangedListener {
     SQLiteHandler db;
     Toolbar toolbar;
     SessionManager session;
@@ -28,6 +41,8 @@ public class Home extends AppCompatActivity
     BottomNavigationView bm;
     Snackbar snackbar;
     String s,temp;
+   public static DrawerLayout drawer;
+    ActionBarDrawerToggle toggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +52,7 @@ public class Home extends AppCompatActivity
 
 
 
-
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
 
         db = new SQLiteHandler(getApplicationContext());
         dl=findViewById(R.id.drawer_layout);//using this ID for displaying SnackBar
@@ -45,40 +60,50 @@ public class Home extends AppCompatActivity
         setSupportActionBar(toolbar);
 //       getActionBar().setDisplayHomeAsUpEnabled(true);
         bm = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationViewHelper.removeShiftMode(bm);
         bm.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
+
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                        switch (item.getItemId()) {
-                            case R.id.navigation_home:
+                        clearBackStack();
 
-                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_HOME()).commit();
+                        switch (item.getItemId()) {
+
+                            case R.id.navigation_home:
+                               // clearBackStack();
+
+                              getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_HOME()).commit();
+                               // viewFragment(new fragment_HOME(), "FRAGMENT_HO ME");
 
                                 break;
                             case R.id.navigation_ask:
-
+                               // clearBackStack();
                                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
+                               //   // viewFragment(new fragment_new_Home(), "FRAGMENT_OTHER");
 
                                 break;
                             case R.id.navigation_messages:
+                               // clearBackStack();
 
-                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
-
+                              getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
+                                //viewFragment(new fragment_new_Home(), "FRAGMENT_OTHER");
                                 break;
                             case R.id.navigation_product_details:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_brand()).commit();
-
+                               // clearBackStack();
+                             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_brand()).commit();
+                               // viewFragment(new fragment_brand(), "FRAGMENT_OTHER");
                         }
+
 
                         return true;
                     }
                 });
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_HOME()).commit();
 
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+       drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+       toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -89,6 +114,7 @@ public class Home extends AppCompatActivity
         View header = navigationView.getHeaderView(0);
         navheadername = header.findViewById(R.id.drawer_layout_name);
         navheader_email = header.findViewById(R.id.drawer_layout_email);
+//        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
 
         session = new SessionManager(getApplicationContext());
@@ -124,6 +150,17 @@ public class Home extends AppCompatActivity
             snackbar.show();
 
         }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(getSupportFragmentManager().getBackStackEntryCount() > 0){
+                    getSupportFragmentManager().popBackStack();
+                }else {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+            }
+        });
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -159,9 +196,10 @@ public class Home extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
+            super.onBackPressed();
+
+
     }
 
     private void logoutUser() {
@@ -185,7 +223,10 @@ public class Home extends AppCompatActivity
         finish();
     }
 
-//    @Override
+
+
+
+    //    @Override
 //    protected void onStart() {
 //        super.onStart();
 //
@@ -195,6 +236,55 @@ public class Home extends AppCompatActivity
 //
 //
 //    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case android.R.id.home:
+                // todo: goto back activity from here
+                Log.i("BackButton", "Pressed");
+                // getFragmentManager().beginTransaction().replace(R.id.content,home).commit();
+               //Going To previous Fragment
+                onBackPressed();
+
+
+
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackStackChanged() {
+        if(getSupportFragmentManager().getBackStackEntryCount() > 0){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }else {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            toggle.syncState();
+        }
+    }
+    private void clearBackStack() {
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        while (fragmentManager.getBackStackEntryCount()!=0) {
+            fragmentManager.popBackStackImmediate();
+        }
+    }
+//
+// public void clearBackstack() {
+//
+//   FragmentManager.BackStackEntry entry = getSupportFragmentManager().getBackStackEntryAt(
+//            0);
+//    getSupportFragmentManager().popBackStack(entry.getId(),
+//            FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//    getSupportFragmentManager().executePendingTransactions();
+//
+//}
+
 }
 
 

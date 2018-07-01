@@ -1,12 +1,13 @@
-package com.handsintech.coder.e_astro;
+package com.handsintech.coder.e_astro.Activites;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
+
+import com.handsintech.coder.e_astro.Activites.Config;
+import com.handsintech.coder.e_astro.Activites.ForgotPassword;
 
 import java.util.Properties;
 

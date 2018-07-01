@@ -1,10 +1,14 @@
-package com.handsintech.coder.e_astro;
+package com.handsintech.coder.e_astro.Activites;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.handsintech.coder.e_astro.Activites.MainActivity;
+import com.handsintech.coder.e_astro.R;
+
 //SPLASHSCREEN
 public class SplashScreen extends AppCompatActivity {
 

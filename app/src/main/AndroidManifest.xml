@@ -14,10 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Activites.MainActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"/>
-        <activity android:name=".SplashScreen"
+        <activity android:name=".Activites.SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,23 +25,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ForgotPassword"
+        <activity android:name=".Activites.ForgotPassword"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activites.LoginActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:noHistory="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Activites.RegisterActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:noHistory="true"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Home"
+        <activity android:name=".Activites.Home"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
 

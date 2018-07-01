@@ -6,25 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment_new_Home"
+    style="@style/AppTheme.NoActionBar"
     >
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_below="@id/tabs"
-        android:orientation="horizontal"
-        tools:ignore="RtlCompat" />
+
 
 
 
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/brands_recylcerView"
+        android:id="@+id/brands_product_recylcerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/navigation"
@@ -36,7 +29,7 @@
 
 
     <ProgressBar
-        android:id="@+id/brands_pb"
+        android:id="@+id/brands_product_pb"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,7 +39,7 @@
         android:layout_marginBottom="293dp" />
 
     <ProgressBar
-        android:id="@+id/brands_pb1"
+        android:id="@+id/brands_product_pb1"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,7 +48,7 @@
         android:layout_centerHorizontal="true" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/brands_fab"
+        android:id="@+id/brands_product_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

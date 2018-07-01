@@ -34,7 +34,8 @@
 
     <string name="title_home">Home</string>
     <string name="title_dashboard">Ask</string>
-    <string name="title_notifications">Mail</string>
+    <string name="title_notifications">Settings</string>
+    <string name="title_mail">Mail</string>
     <string name="title_prodctdetails">Product Details</string>
 
 </resources>

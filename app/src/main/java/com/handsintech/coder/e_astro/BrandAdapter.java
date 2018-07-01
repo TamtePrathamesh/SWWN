@@ -112,6 +112,19 @@ public BrandAdapter(Context mCtx, List<Brands> brandList) {
         brandList.addAll(countryModels);
         notifyDataSetChanged();
     }
+    @Override
+    public int getItemViewType (int position) {
+        if (isSwitchView){
+            return LIST_ITEM;
+        }else{
+            return GRID_ITEM;
+        }
+    }
+
+    public boolean toggleItemViewType () {
+        isSwitchView = !isSwitchView;
+        return isSwitchView;
+    }
     private void setFadeAnimation(View view, int position) {
         AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
         anim.setDuration(FADE_DURATION);

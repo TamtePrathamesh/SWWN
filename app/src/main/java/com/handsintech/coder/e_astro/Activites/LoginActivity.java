@@ -1,6 +1,5 @@
-package com.handsintech.coder.e_astro;
+package com.handsintech.coder.e_astro.Activites;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +18,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.handsintech.coder.e_astro.AppController;
+import com.handsintech.coder.e_astro.R;
+import com.handsintech.coder.e_astro.SQLiteHandler;
+import com.handsintech.coder.e_astro.SessionManager;
+import com.handsintech.coder.e_astro.SharedPref;
 
 import org.json.JSONException;
 import org.json.JSONObject;

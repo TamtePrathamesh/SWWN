@@ -1,22 +1,20 @@
 package com.handsintech.coder.e_astro;
 
-
-import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -42,106 +40,68 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+public class fragment_brand_products extends Fragment implements SearchView.OnQueryTextListener{
 
 
-public class fragment_brand extends Fragment  implements SearchView.OnQueryTextListener{
-    public RecyclerView catrecyclerView;
-    public RecyclerView.Adapter catadapter;
-    public List<listitems> list ;
+    List<BrandProduct> brandproductList;
 
-    public FloatingActionButton fab;
+    BrandProductAdapter adapter;
+    String value;
 
-    BrandAdapter adapter;
-
-    List<Brands> brandList;
-    Context mContext;
-    View v;
     int page=0;
     //the recyclerview
     RecyclerView recyclerView;
-    String request_url = "http://handintech.000webhostapp.com/NEW_HIT/brands.php?start=";
-
-
+    String request_url = "http://handintech.000webhostapp.com/NEW_HIT/brand_product.php?start=";
+    public ProgressBar pb,pb1;
+    AppCompatActivity appCompatActivity;
+    View v;
     public static interface ClickListener{
         public void onClick(View view,int position);
         public void onLongClick(View view,int position);
-    }
-    public void catrecycler()
-    {   list= new ArrayList<>();
-        String request="http://handintech.000webhostapp.com/NEW_HIT/getcatagories.php";
-        catrecyclerView=(RecyclerView)v.findViewById(R.id.recycler_view);
-        catrecyclerView.setHasFixedSize(true);
-
-        catrecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
-
-        StringRequest stringRequest= new StringRequest(Request.Method.GET, request,
-                new Response.Listener<String>() {
-                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                    @Override
-                    public void onResponse(String response) {
-                        JSONArray json= null;
-                        try {
-                            json = new JSONArray(response);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
-                        }
-                        int i=json.length();
-                        // Toast.makeText(getContext(),"response recieved with "+i+" results",Toast.LENGTH_LONG).show();
-                        for(int j=0;j<i;j++)
-                        {
-                            try {
-                                JSONObject jsonObject=json.getJSONObject(j);
-                                listitems l=new listitems(jsonObject.getString("categery"));
-                                list.add(l);
-                                Log.d("cat",jsonObject.getString("categery"));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        catadapter=new catagoryAdapter(list,getContext());
-                        catrecyclerView.setAdapter(catadapter);
-                    }},
-                new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                    }
-                });
-        Volley.newRequestQueue(getContext()).add(stringRequest);
-
-    }
-
-
-    public ProgressBar pb,pb1;
-    public fragment_brand() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         v= inflater.inflate(R.layout.fragment_brand, container, false);
+        v = inflater.inflate(R.layout.fragment_brand_product, container, false);
+
+
+//       Toolbar toolbar = (Toolbar)v. findViewById(R.id.toolbar);
+//        appCompatActivity = (AppCompatActivity)getActivity();
+//      //   appCompatActivity.setSupportActionBar(toolbar);
+//        appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        appCompatActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+     //   Home.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getActivity().onBackPressed();
+//            }
+//        });
+
+
+
+
+
+
+        value= this.getArguments().getString("key");//get your parameters
+       Log.d("display",value);
+
         page=0;
+        pb=(ProgressBar)v.findViewById(R.id.brands_product_pb);
+        pb1=(ProgressBar)v.findViewById(R.id.brands_product_pb1);
 
-        pb=(ProgressBar)v.findViewById(R.id.brands_pb);
-        pb1=(ProgressBar)v.findViewById(R.id.brands_pb1);
-
-        recyclerView = v.findViewById(R.id.brands_recylcerView);
+        recyclerView = v.findViewById(R.id.brands_product_recylcerView);
         setHasOptionsMenu(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new MyDividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL, 36));
 
-
-        mContext=getActivity();
-
         //initializing the productlist
-        brandList = new ArrayList<>();
+        brandproductList = new ArrayList<>();
         // recyclerView.setOnScrollChangeListener(this);
-        adapter = new BrandAdapter(getActivity(), brandList);
+        adapter = new BrandProductAdapter(getActivity(), brandproductList);
         recyclerView.setAdapter(adapter);
 
 
@@ -160,7 +120,7 @@ public class fragment_brand extends Fragment  implements SearchView.OnQueryTextL
                         // we must check if itShouldLoadMore variable is true [unlocked]
                         if (isLastItemDisplaying(recyclerView)) {
                             // getDataFromServer(requestCount);
-                            loadBrands();
+                            loadBrandsproducts();
                             //adapter.notifyItemInserted(page*10);
                             //  adapter.notifyDataSetChanged();
                         }
@@ -169,53 +129,51 @@ public class fragment_brand extends Fragment  implements SearchView.OnQueryTextL
                 }
             }
         });
-
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity(),
                 recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, final int position) {
-                //Values are passing to activity & to fragment as well
-                Toast.makeText(getActivity(), "Single Click on position        :"+position,
-                        Toast.LENGTH_SHORT).show();
 
-                String brandname=brandList.get(position).getBrand_name();
-                Log.d("test",brandname);
+                String brand_product_name=brandproductList.get(position).getBrand_product_name();
+                Log.d("eeeee",brand_product_name);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("key",brandname); // set your parameteres
+            Bundle bundle = new Bundle();
+           bundle.putString("57",brand_product_name);
+            Log.d("bundle",bundle.toString());
 
-              fragment_brand_products nextFragment = new fragment_brand_products();
-              nextFragment.setArguments(bundle);
+                fragment_product_details pd=new fragment_product_details();
+                pd.setArguments(bundle);
+
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().addToBackStack(null);
-                fragmentTransaction.replace(R.id.frame_layout, nextFragment, "fragment_brand_products");
+                fragmentTransaction.replace(R.id.frame_layout, pd, "fragment_product_details");
                 fragmentTransaction.commit();
-     // getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, nextFragment).addToBackStack("fragment_brand.java").commit();
+             //   Log.d("display",brand_product_name);
+
+               // getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,pd).addToBackStack(null).commit();
+
+
             }
 
             @Override
             public void onLongClick(View view, int position) {
-//                Toast.makeText(getActivity(), "Long press on position :"+position,
-//                        Toast.LENGTH_LONG).show();
+
             }
         }));
-if(getActivity()!=null) {
-    loadBrands();
-    catrecycler();
-}
 
-
-        return  v;
+        loadBrandsproducts();
+        return v;
     }
 
-    private void loadBrands() {
+
+    private void loadBrandsproducts() {
         page+=1;
         if(page==1){
             pb.setVisibility(View.VISIBLE);}
         else{pb1.setVisibility(View.VISIBLE);  }
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, request_url+page,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, request_url+page+"&brand="+value,
                 new Response.Listener<String>() {
                     @Override
 
@@ -229,7 +187,7 @@ if(getActivity()!=null) {
                                 Toast.makeText(getActivity(), "No More Items Available", Toast.LENGTH_SHORT).show();
                             } else {
                                 int i1=array.length();
-//                                Toast.makeText(getContext(),i1+""+"brands",Toast.LENGTH_LONG).show();
+                              //  Toast.makeText(getActivity(),i1+""+"brands",Toast.LENGTH_LONG).show();
 
                                 //traversing through all the object
                                 for (int i = 0; i < array.length(); i++) {
@@ -240,14 +198,13 @@ if(getActivity()!=null) {
                                         pb.setVisibility(View.GONE);}
                                     else {pb1.setVisibility(View.GONE);}
                                     //adding the product to product list
-                                    brandList.add(new Brands(
+                                    brandproductList.add(new BrandProduct(
 
-                                            product.getString("brand_name"),
-                                            product.getString("brand_des"),
-                                            product.getString("brand_logo")
+                                            product.getString("brand_product_name"),
+                                            product.getString("brand_product_logo"),
+                                            product.getString("brand_product_price")
 
                                     ));
-
                                 }}
                             //creating adapter object and setting it to recyclerview
 //                            adapter = new ProductsAdapter(getActivity(), productList);
@@ -274,7 +231,7 @@ if(getActivity()!=null) {
 
                     }
                 });
-        adapter.notifyItemRangeInserted(page*10,brandList.size());
+        adapter.notifyItemRangeInserted(page*10,brandproductList.size());
         //adding our stringrequest to queue
         Volley.newRequestQueue(getActivity()).add(stringRequest);
     }
@@ -286,9 +243,11 @@ if(getActivity()!=null) {
         }
         return false;
     }
+
+
     @Override
     public boolean onQueryTextSubmit(String query) {
-        final List<Brands> filteredModelList = filter(brandList, query);
+        final List<BrandProduct> filteredModelList = filter(brandproductList, query);
 
         adapter.setFilter(filteredModelList);
         return true;
@@ -296,15 +255,15 @@ if(getActivity()!=null) {
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        final List<Brands> filteredModelList = filter(brandList, newText);
+        final List<BrandProduct> filteredModelList = filter(brandproductList, newText);
 
         adapter.setFilter(filteredModelList);
         return true;
     }
-    private List<Brands> filter(List<Brands> models, String query) {
-        query = query.toLowerCase();final List<Brands> filteredModelList = new ArrayList<>();
-        for (Brands model : models) {
-            final String text = model.getBrand_name().toLowerCase();
+    private List<BrandProduct> filter(List<BrandProduct> models, String query) {
+        query = query.toLowerCase();final List<BrandProduct> filteredModelList = new ArrayList<>();
+        for (BrandProduct model : models) {
+            final String text = model.getBrand_product_name().toLowerCase();
             if (text.contains(query)) {
                 filteredModelList.add(model);
             }
@@ -373,7 +332,7 @@ if(getActivity()!=null) {
                     @Override
                     public boolean onMenuItemActionCollapse(MenuItem item) {
 // Do something when collapsed
-                        adapter.setFilter(brandList);
+                        adapter.setFilter(brandproductList);
                         return true; // Return true to collapse action view
                     }
 
@@ -403,6 +362,9 @@ if(getActivity()!=null) {
 //
 //                break;
 //        }
+
+
+
         if (id == R.id.action_settings) {
             getActivity().supportInvalidateOptionsMenu();
             boolean isSwitched = adapter.toggleItemViewType();
@@ -418,8 +380,5 @@ if(getActivity()!=null) {
     }
 
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
+
 }

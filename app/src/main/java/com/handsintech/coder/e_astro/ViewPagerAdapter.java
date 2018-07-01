@@ -44,12 +44,12 @@ public class ViewPagerAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.custom_layout, null);
 
-        SliderUtils utils = sliderImg.get(position);
+        final SliderUtils utils = sliderImg.get(position);
 
         ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
 
        imageLoader = CustomVolleyRequest.getInstance(context).getImageLoader();
-        imageLoader.get(utils.getSliderImageUrl(), ImageLoader.getImageListener(imageView, R.mipmap.ic_launcher, android.R.drawable.ic_dialog_alert));
+        imageLoader.get(utils.getSliderImageUrl(), ImageLoader.getImageListener(imageView, R.mipmap.ic_launcher, R.mipmap.ic_launcher));
 
 
         view.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +58,8 @@ public class ViewPagerAdapter extends PagerAdapter {
 
                 if(position == 0){
                     Toast.makeText(context, "Slide 1 Clicked", Toast.LENGTH_SHORT).show();
+
+
                 } else if(position == 1){
                     Toast.makeText(context, "Slide 2 Clicked", Toast.LENGTH_SHORT).show();
                 } else {
