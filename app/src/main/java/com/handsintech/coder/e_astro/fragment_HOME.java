@@ -24,7 +24,7 @@ public class fragment_HOME extends Fragment {
         v= inflater.inflate(R.layout.fragment_home, container, false);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
-        mViewPager = (ViewPager)v. findViewById(R.id.container);
+        mViewPager = (ViewPager)v. findViewById(R.id.container1);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout)v. findViewById(R.id.tabs);

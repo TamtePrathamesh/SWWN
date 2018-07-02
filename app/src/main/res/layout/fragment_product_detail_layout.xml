@@ -33,13 +33,14 @@
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
-            <android.support.v4.view.ViewPager
-                android:id="@+id/product_detail_viewPager"
-                android:layout_width="match_parent"
-                android:layout_height="190dp"
-                android:layout_marginTop="137dp" >
 
-            </android.support.v4.view.ViewPager>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/product_detail_viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="216dp"
+            android:layout_marginTop="137dp">
+
+        </android.support.v4.view.ViewPager>
         <LinearLayout
             android:id="@+id/SliderDots"
             android:layout_width="match_parent"

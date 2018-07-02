@@ -313,6 +313,9 @@ if(getActivity()!=null) {
     }
 
 
+
+
+
     class RecyclerTouchListener implements RecyclerView.OnItemTouchListener{
 
         private ClickListener clicklistener;

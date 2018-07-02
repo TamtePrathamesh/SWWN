@@ -251,9 +251,6 @@ public class RegisterActivity extends AppCompatActivity {
                 params.put("name", name);
                 params.put("email", email);
                 params.put("password", password);
-                params.put("country",country);
-                params.put("phoneno",phoneno);
-                params.put("gender",gender);
 
                 return params;
             }
