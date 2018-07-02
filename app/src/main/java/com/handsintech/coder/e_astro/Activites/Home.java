@@ -24,6 +24,7 @@ import com.handsintech.coder.e_astro.EveryTimeRequied;
 import com.handsintech.coder.e_astro.R;
 import com.handsintech.coder.e_astro.SQLiteHandler;
 import com.handsintech.coder.e_astro.SessionManager;
+import com.handsintech.coder.e_astro.Setting;
 import com.handsintech.coder.e_astro.SharedPref;
 import com.handsintech.coder.e_astro.fragment_HOME;
 import com.handsintech.coder.e_astro.fragment_brand;
@@ -92,7 +93,7 @@ public class Home extends AppCompatActivity
                                 break;
                             case R.id.navigation_product_details:
                                // clearBackStack();
-                             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_brand()).commit();
+                             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new Setting()).commit();
                                // viewFragment(new fragment_brand(), "FRAGMENT_OTHER");
                         }
 
@@ -238,26 +239,26 @@ public class Home extends AppCompatActivity
 //    }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-
-            case android.R.id.home:
-                // todo: goto back activity from here
-                Log.i("BackButton", "Pressed");
-                // getFragmentManager().beginTransaction().replace(R.id.content,home).commit();
-               //Going To previous Fragment
-                onBackPressed();
-
-
-
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        switch (item.getItemId()) {
+//
+//            case android.R.id.home:
+//                // todo: goto back activity from here
+//                Log.i("BackButton", "Pressed");
+//                // getFragmentManager().beginTransaction().replace(R.id.content,home).commit();
+//               //Going To previous Fragment
+//                onBackPressed();
+//
+//
+//
+//                return true;
+//
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     @Override
     public void onBackStackChanged() {
