@@ -9,13 +9,7 @@
 
 
 
-            <!--<Button-->
-                <!--android:id="@+id/cat_btn"-->
-                <!--android:layout_width="150dp"-->
-                <!--android:layout_height="40dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@drawable/rounded_buttons"-->
-                <!--android:text="Hair" />-->
+
     <android.support.v7.widget.CardView
         android:id="@+id/card"
         android:layout_marginTop="8dp"
@@ -40,36 +34,4 @@
 
     </android.support.v7.widget.CardView>
 
-    <!--<Button-->
-                <!--android:id="@+id/nail"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@drawable/rounded_buttons"-->
-                <!--android:text="Nail" />-->
-
-
-            <!--<Button-->
-                <!--android:id="@+id/skin"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@drawable/rounded_buttons"-->
-                <!--android:text="Skin" />-->
-            <!---->
-            <!--<Button-->
-                <!--android:id="@+id/career"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@drawable/rounded_buttons"-->
-                <!--android:text="career" />-->
-
-            <!--<Button-->
-                <!--android:id="@+id/care"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@drawable/rounded_buttons"-->
-                <!--android:text="Care" />-->
 </LinearLayout>

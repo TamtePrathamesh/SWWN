@@ -13,7 +13,4 @@ public class listitems {
         return text1;
     }
 
-
-
-
 }

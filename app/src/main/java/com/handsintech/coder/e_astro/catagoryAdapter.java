@@ -26,8 +26,6 @@ public class catagoryAdapter extends RecyclerView.Adapter<catagoryAdapter.ViewHo
     }
 
 
-
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
