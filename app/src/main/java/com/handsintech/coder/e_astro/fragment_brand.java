@@ -294,6 +294,7 @@ if(getActivity()!=null) {
         return true;
     }
 
+    //////
     @Override
     public boolean onQueryTextChange(String newText) {
         final List<Brands> filteredModelList = filter(brandList, newText);
