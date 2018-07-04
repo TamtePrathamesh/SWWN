@@ -1,4 +1,4 @@
-package com.handsintech.coder.e_astro;
+package com.handsintech.coder.e_astro.tab_by_brands;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +17,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.handsintech.coder.e_astro.CustomVolleyRequest;
+import com.handsintech.coder.e_astro.R;
+import com.handsintech.coder.e_astro.SliderUtils;
+import com.handsintech.coder.e_astro.ViewPagerAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;

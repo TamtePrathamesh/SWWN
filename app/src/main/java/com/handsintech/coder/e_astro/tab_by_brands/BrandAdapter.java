@@ -1,12 +1,6 @@
-package com.handsintech.coder.e_astro;
+package com.handsintech.coder.e_astro.tab_by_brands;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,6 +11,7 @@ import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 
 
+import com.handsintech.coder.e_astro.R;
 import com.squareup.picasso.Picasso;
 
 
@@ -53,7 +48,7 @@ public BrandAdapter(Context mCtx, List<Brands> brandList) {
         if (viewType == LIST_ITEM){
             itemView = LayoutInflater.from(mCtx).inflate( R.layout.brands_single_item, null);
         }else{
-            itemView = LayoutInflater.from(mCtx).inflate(R.layout.items_grid, null);
+            itemView = LayoutInflater.from(mCtx).inflate(R.layout.brand_single_item_grid, null);
         }
         return new BrandViewHolder(itemView);
 

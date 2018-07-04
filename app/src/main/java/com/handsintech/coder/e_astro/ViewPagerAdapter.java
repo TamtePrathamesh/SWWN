@@ -1,8 +1,14 @@
 package com.handsintech.coder.e_astro;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
+import com.handsintech.coder.e_astro.tab_By_products.ByProductTab_product_details;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -39,7 +46,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, final int position) {
+    public Object instantiateItem(final ViewGroup container, final int position) {
 
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.custom_layout, null);
@@ -58,6 +65,14 @@ public class ViewPagerAdapter extends PagerAdapter {
 
                 if(position == 0){
                     Toast.makeText(context, "Slide 1 Clicked", Toast.LENGTH_SHORT).show();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("123",utils.getSliderImageUrl()); // set your parameteres
+
+                    fullImage nextFragment = new fullImage();
+                    nextFragment.setArguments(bundle);
+
+                  ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,nextFragment).addToBackStack(null).commit();
+
 
 
                 } else if(position == 1){

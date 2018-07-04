@@ -1,4 +1,4 @@
-package com.handsintech.coder.e_astro;
+package com.handsintech.coder.e_astro.tab_by_brands;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.handsintech.coder.e_astro.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

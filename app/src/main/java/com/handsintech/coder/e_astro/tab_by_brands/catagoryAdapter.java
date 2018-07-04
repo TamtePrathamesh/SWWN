@@ -1,4 +1,4 @@
-package com.handsintech.coder.e_astro;
+package com.handsintech.coder.e_astro.tab_by_brands;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.handsintech.coder.e_astro.R;
 
 import java.util.ArrayList;
 import java.util.List;

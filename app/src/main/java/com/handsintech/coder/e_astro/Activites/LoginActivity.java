@@ -236,8 +236,8 @@ public class LoginActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("email", email);
                 params.put("password", password);
-                //Toast.makeText(LoginActivity.this,"Email:"+email+" password:"+password+"",Toast.LENGTH_LONG).show();
                 return params;
+
             }
 
         };

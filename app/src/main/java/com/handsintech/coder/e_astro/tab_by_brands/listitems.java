@@ -1,4 +1,4 @@
-package com.handsintech.coder.e_astro;
+package com.handsintech.coder.e_astro.tab_by_brands;
 
 import android.util.Log;
 

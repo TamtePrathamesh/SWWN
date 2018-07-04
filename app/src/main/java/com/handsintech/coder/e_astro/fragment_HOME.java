@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.handsintech.coder.e_astro.tab_By_products.tab2_by_products;
+import com.handsintech.coder.e_astro.tab_by_brands.fragment_brand;
+
 public class fragment_HOME extends Fragment {
 
 
@@ -70,7 +73,7 @@ public class fragment_HOME extends Fragment {
                     return fb;
 
                 case 1:
-                    fragment_new_Home pd = new fragment_new_Home();
+                    tab2_by_products pd = new tab2_by_products();
                     return pd;
             }
             return null;

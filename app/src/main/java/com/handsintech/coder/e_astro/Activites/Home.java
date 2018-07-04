@@ -15,7 +15,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -27,8 +26,7 @@ import com.handsintech.coder.e_astro.SessionManager;
 import com.handsintech.coder.e_astro.Setting;
 import com.handsintech.coder.e_astro.SharedPref;
 import com.handsintech.coder.e_astro.fragment_HOME;
-import com.handsintech.coder.e_astro.fragment_brand;
-import com.handsintech.coder.e_astro.fragment_new_Home;
+import com.handsintech.coder.e_astro.tab_by_brands.fragment_brand;
 
 import java.util.HashMap;
 
@@ -50,6 +48,7 @@ public class Home extends AppCompatActivity
         // getSupportActionBar().hide();
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
 
 
 
@@ -81,14 +80,14 @@ public class Home extends AppCompatActivity
                                 break;
                             case R.id.navigation_ask:
                                // clearBackStack();
-                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_brand()).commit();
                                //   // viewFragment(new fragment_new_Home(), "FRAGMENT_OTHER");
 
                                 break;
                             case R.id.navigation_messages:
                                // clearBackStack();
 
-                              getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_new_Home()).commit();
+                              getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_brand()).commit();
                                 //viewFragment(new fragment_new_Home(), "FRAGMENT_OTHER");
                                 break;
                             case R.id.navigation_product_details:
