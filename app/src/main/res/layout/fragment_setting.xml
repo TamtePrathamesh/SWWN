@@ -127,9 +127,32 @@
                 android:paddingLeft="20dp"
                 android:text="Forgot Password"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/profile_logout"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@android:drawable/ic_secure"/>
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/profile_logout_txtview"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:text="Logout"/>
+        </LinearLayout>
     </LinearLayout>
 
 
 
 </LinearLayout>
+
+
 </ScrollView>

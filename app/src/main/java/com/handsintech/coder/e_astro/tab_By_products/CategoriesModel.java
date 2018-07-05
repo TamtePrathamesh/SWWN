@@ -11,6 +11,8 @@ public class CategoriesModel {
         this.categriesname = categriesname;
     }
 
+
+
     public String getCategory_id() {
         return category_id;
     }

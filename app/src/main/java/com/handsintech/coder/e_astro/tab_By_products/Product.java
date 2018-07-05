@@ -17,6 +17,8 @@ public class Product {
         this.product_logo = product_logo;
 
 
+
+
     }
 
     public Product(String id, String product_name, String sku, String product_logo) {

@@ -146,6 +146,8 @@ public class tab2_by_products extends Fragment implements SearchView.OnQueryText
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction().addToBackStack(null);
                 fragmentTransaction.replace(R.id.frame_layout, nextFragment, "fragment_brand_products");
+
+
                 fragmentTransaction.commit();
                 // getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, nextFragment).addToBackStack("fragment_brand.java").commit();
             }

@@ -107,11 +107,17 @@ public class ByProductAdapter extends RecyclerView.Adapter<ByProductAdapter.ByPr
             ImageView im;
 
 
+
+
+
+
             public ByProductAdapterViewHolder(View itemView) {
                 super(itemView);
 
                 if(isSwitchView)
                 {
+
+
 
                     civ = itemView.findViewById(R.id.product_logo);
                     product_name = itemView.findViewById(R.id.product_name);

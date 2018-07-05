@@ -1,6 +1,7 @@
 package com.handsintech.coder.e_astro;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.handsintech.coder.e_astro.Activites.Home;
+import com.handsintech.coder.e_astro.Activites.LoginActivity;
 
 import java.util.HashMap;
 
@@ -29,7 +32,7 @@ public class Setting extends Fragment {
     }
 
     ImageView profile_image_view;
-    TextView profilename_txtView;
+    TextView profilename_txtView,logouttxt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,8 +40,11 @@ public class Setting extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_setting, container, false);
 
+        session=new SessionManager(getActivity());
+
         profile_image_view=v.findViewById(R.id.profile_image);
         profilename_txtView=v.findViewById(R.id.profile_name);
+        logouttxt=v.findViewById(R.id.profile_logout_txtview);
 
 
         db = new SQLiteHandler(getActivity());
@@ -65,7 +71,12 @@ public class Setting extends Fragment {
         profile_image_view.setImageDrawable(drawable);
         profile_image_view.bringToFront();
 
-
+logouttxt.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        logoutUser();
+    }
+});
 
 
         return v;
@@ -83,5 +94,25 @@ public class Setting extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+    private void logoutUser() {
+        session.setLogin(false);
+
+        db.deleteUsers();
+
+
+
+        // Launching the login activity
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        if(SharedPref.getInstance(getActivity()).IsUserRegiserted()){
+            SharedPref.getInstance(getActivity()).UserRegiserted(false);
+            intent.putExtra("check","user");}
+        else if(SharedPref.getInstance(getActivity()).IsexpertRegiserted()){
+            SharedPref.getInstance(getActivity()).ExpertRegiserted(false);
+            intent.putExtra("check", "expert");
+
+        }
+        startActivity(intent);
+        getActivity().finish();
     }
 }

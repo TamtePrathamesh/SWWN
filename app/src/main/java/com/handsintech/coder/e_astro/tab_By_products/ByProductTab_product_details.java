@@ -23,8 +23,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.handsintech.coder.e_astro.Activites.LoginActivity;
+import com.handsintech.coder.e_astro.AskExpert;
 import com.handsintech.coder.e_astro.CustomVolleyRequest;
 import com.handsintech.coder.e_astro.R;
+import com.handsintech.coder.e_astro.SharedPref;
 import com.handsintech.coder.e_astro.SliderUtils;
 import com.handsintech.coder.e_astro.ViewPagerAdapter;
 
@@ -69,7 +72,15 @@ View v;
 
         pro_detail_id= this.getArguments().getString("key_id");//get your parameters
 
-        btn_askExpert=v.findViewById(R.id.buttonExpertlogin);
+        btn_askExpert=v.findViewById(R.id.button_ask_expert);
+
+
+        if( SharedPref.getInstance(getActivity()).IsexpertRegiserted())
+        {
+            btn_askExpert.setVisibility(View.GONE);
+        }
+
+
 
 
         product_detail_name_txtview=v.findViewById(R.id.by_protab_product_detail_name);
@@ -110,6 +121,13 @@ View v;
             @Override
             public void onClick(View view) {
 
+                String temp=product_detail_name_txtview.getText().toString();
+                Bundle bundle = new Bundle();
+                bundle.putString("pro",temp); // set your parameteres
+
+                AskExpert nextFragment = new AskExpert();
+                nextFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,nextFragment).addToBackStack(null).commit();
             }
         });
 

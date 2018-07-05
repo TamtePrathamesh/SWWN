@@ -65,17 +65,18 @@ public class ViewPagerAdapter extends PagerAdapter {
 
                 if(position == 0){
                     Toast.makeText(context, "Slide 1 Clicked", Toast.LENGTH_SHORT).show();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("123",utils.getSliderImageUrl()); // set your parameteres
-
-                    fullImage nextFragment = new fullImage();
-                    nextFragment.setArguments(bundle);
-
-                  ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,nextFragment).addToBackStack(null).commit();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("123",utils.getSliderImageUrl()); // set your parameteres
+//
+//                    AskExpert nextFragment = new AskExpert();
+//                    nextFragment.setArguments(bundle);
+//
+//                  ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout,nextFragment).addToBackStack(null).commit();
 
 
 
                 } else if(position == 1){
+
                     Toast.makeText(context, "Slide 2 Clicked", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(context, "Slide 3 Clicked", Toast.LENGTH_SHORT).show();
