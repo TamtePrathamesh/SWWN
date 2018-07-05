@@ -126,6 +126,8 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
+
+
     }
     private void checkLogin(final String email, final String password) {
         // Tag used to cancel the request
