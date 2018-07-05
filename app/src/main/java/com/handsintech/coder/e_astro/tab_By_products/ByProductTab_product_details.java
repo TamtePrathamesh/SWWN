@@ -199,7 +199,7 @@ View v;
                                 for(int i = 0; i < dotscount; i++){
 
                                     dots[i] = new ImageView(getActivity());
-                                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot));
+                                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_not_selected));
 
                                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -209,7 +209,7 @@ View v;
 
                                 }
 
-                                dots[0].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot));
+                                dots[0].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_blue_over));
 
 
 

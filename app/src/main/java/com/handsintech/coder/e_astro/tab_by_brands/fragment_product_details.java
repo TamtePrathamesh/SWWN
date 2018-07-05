@@ -80,10 +80,10 @@ public class fragment_product_details extends Fragment{
             public void onPageSelected(int position) {
 
                 for(int i = 0; i< dotscount; i++){
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot));
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_not_selected));
                 }
 
-                dots[position].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_over));
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_blue_over));
 
             }
 
