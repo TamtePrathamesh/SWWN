@@ -22,7 +22,7 @@
         app:showAsAction="always|withText"/>
     <item
         android:id="@+id/navigation_product_details"
-        android:icon="@drawable/setting"
+        android:icon="@drawable/settings"
         android:title="@string/title_notifications"
         app:showAsAction="always|withText"/>
 
