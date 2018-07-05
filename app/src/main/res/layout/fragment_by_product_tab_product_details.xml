@@ -74,7 +74,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:visibility="visible"
+            android:visibility="gone"
            android:layout_below="@+id/by_protab_product_details"
             android:background="@drawable/rounded_buttons"
             android:text="Ask Expert"

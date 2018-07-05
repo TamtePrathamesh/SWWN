@@ -25,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.handsintech.coder.e_astro.Activites.Home;
 import com.handsintech.coder.e_astro.Activites.LoginActivity;
 import com.handsintech.coder.e_astro.AskExpert;
 import com.handsintech.coder.e_astro.CustomVolleyRequest;
@@ -75,10 +76,10 @@ View v;
          v= inflater.inflate(R.layout.fragment_by_product_tab_product_details, container, false);
 
 
+        Toolbar bar=Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
+        bar.setTitle("Product details");
+//
 
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-
-        toolbar.setTitle("Product details");
 
         pro_detail_id= this.getArguments().getString("key_id");//get your parameters
 
@@ -174,7 +175,7 @@ View v;
 
                                     product_detail_name_txtview.setText(tempname);
                                     product_details_txtview.setText(tempdes);
-
+                            btn_askExpert.setVisibility(View.VISIBLE);
 
 
 //

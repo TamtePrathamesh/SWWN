@@ -162,7 +162,7 @@ public class Home extends AppCompatActivity
                 if(getSupportFragmentManager().getBackStackEntryCount() > 0){
                     getSupportFragmentManager().popBackStack();
                 }else {
-
+                        toolbar.setTitle("select expert");
                 }
             }
         });

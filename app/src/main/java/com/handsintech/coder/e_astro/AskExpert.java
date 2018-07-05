@@ -15,6 +15,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,6 +100,10 @@ View v;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v= inflater.inflate(R.layout.fragment_ask_expert, container, false);
+
+
+        Toolbar bar=Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
+        bar.setTitle("Ask the Expert");
 
 
 //        Log.d("track",singleimg_url);
