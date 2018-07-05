@@ -1,0 +1,13 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- pressed -->
+    <item android:state_activated="true"
+        android:color="@color/toggle_user" />
+
+    <item android:state_activated="false"
+        android:color="#ffffff" />
+
+    <!-- Default color -->
+    <item android:color="#ffffff" />
+
+</selector>
