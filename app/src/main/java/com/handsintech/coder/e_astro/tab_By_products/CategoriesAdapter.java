@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.handsintech.coder.e_astro.R;
 import com.handsintech.coder.e_astro.tab_by_brands.listitems;
@@ -53,25 +54,19 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public void onBindViewHolder(CategoriesViewHolder holder, int position) {
 
 
-
-
         CategoriesModel brands = mcategoriesList.get(position);
 
 
 
 
-        String array[]={"fff000","ba68c8","f06292","80deea","9ccc65"};
+        String array[]={"BCA1FC","F2D40F","F891BA","8DDCEB"};
 
 
         holder.category_cardView.setCardBackgroundColor(Color.parseColor("#"+array[position%array.length]));
 
 
-
-
-            holder.product_categories_name.setText(brands.getCategriesname());
-
-
-
+        holder.product_categories_name.setText(brands.getCategriesname());
+        Log.d("value set",brands.getCategriesname());
 
 
     }
@@ -95,7 +90,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
 
                 product_categories_name = itemView.findViewById(R.id.product_catagory_text);
-category_cardView=itemView.findViewById(R.id.product_categries_card);
+                category_cardView=itemView.findViewById(R.id.product_categries_card);
 
 
 

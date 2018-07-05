@@ -37,7 +37,7 @@ public class catagoryAdapter extends RecyclerView.Adapter<catagoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull catagoryAdapter.ViewHolder holder, int position) {
-        String array[]={"fff000","ba68c8","f06292","80deea","9ccc65"};
+        String array[]={"BCA1FC","F2D40F","F891BA","8DDCEB"};
         listitems l=list.get(position);
         holder.textView.setText(l.getText1());
         holder.cardView.setCardBackgroundColor(Color.parseColor("#"+array[position%array.length]));
