@@ -1,78 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/loginConstraint"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/icons"
+    style="style/Theme.NoTitleBar">
 
-
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="560dp"
-        app:layout_constraintBottom_toTopOf="@+id/indicator"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <me.relex.circleindicator.CircleIndicator
-        android:id="@+id/indicator"
-        android:layout_width="132dp"
-        android:layout_height="23dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonUserlogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/buttonUserlogin"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="44dp"
-        android:background="#ea4c88"
-        android:text="@string/button"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonExpertlogin"
-        android:layout_width="131dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="#ea4c88"
-        android:text="@string/expert_login"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.553"
-        app:layout_constraintStart_toEndOf="@+id/buttonUserlogin"
-        app:layout_constraintTop_toTopOf="@+id/indicator"
-        app:layout_constraintVertical_bias="1.0" />
+        app:srcCompat="@drawable/reg_cover" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline3"
+        android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75"
-        app:layout_constraintGuide_begin="60dp" />
+        app:layout_constraintGuide_begin="150dp"
+        app:layout_constraintGuide_percent="0.25" />
 
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="214dp"
+        app:layout_constraintGuide_percent="0.38" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintVertical_bias="1.0">
+
+        <Button
+            android:id="@+id/userbtnid"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/user_toggle"
+            android:text="User"
+            android:textColor="@drawable/toggle_text_color"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="143dp" />
+
+        <Button
+            android:id="@+id/sellerbtnid"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/user_toggle"
+            android:text="Seller"
+            android:textColor="@drawable/toggle_text_color"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteY="144dp" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/new_frame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="1.0"></FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

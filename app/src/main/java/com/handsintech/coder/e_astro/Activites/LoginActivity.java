@@ -2,10 +2,12 @@ package com.handsintech.coder.e_astro.Activites;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -30,89 +32,93 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import es.dmoral.toasty.Toasty;
-
 public class LoginActivity extends AppCompatActivity {
 
-
-    private static Animation shakeAnimation;
-    private ConstraintLayout cl;
-    private static final String TAG = RegisterActivity.class.getSimpleName();
-    private Button btnLogin;
-    private Button btnLinkToRegister,btnforgotpassword;
-    private EditText inputEmail;
-    private EditText inputPassword;
-    private ProgressDialog pDialog;
+    Button sellerbtn,userbtn,signin;
+    EditText emailField,passwordField;
+    TextView forgot,newuser;
+    private static final String TAG = MainActivity.class.getSimpleName();
+    String URL_LOGIN = "http://handsinservices.com/teachingApp/Api/userLogin.php";
+    public String email,password;
     private SessionManager session;
     private SQLiteHandler db;
-    private TextView tvstatus;
-    String s;
-    String URL_LOGIN = "http://handintech.000webhostapp.com/NEW_HIT/login.php?check=";
+    public static Animation shakeAnimation;
+    ConstraintLayout cl;
+    ProgressDialog pDialog;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        tvstatus=findViewById(R.id.status);
-
-       s=getIntent().getStringExtra("check");
-
-        Log.d("info",s);
-
-        if(s.equals("user"))
-        {
-            tvstatus.setVisibility(View.VISIBLE);
-            tvstatus.setText("User Login");
-        }
-        else if(s.equals("expert"))
-        {
-            tvstatus.setVisibility(View.VISIBLE);
-            tvstatus.setText("Expert Login");
-        }
-
-//        getSupportActionBar().hide();
-
-        inputEmail = (EditText) findViewById(R.id.inputemail);
-        inputPassword = (EditText) findViewById(R.id.inputpass);
-        btnLogin = (Button) findViewById(R.id.loginbtn);
-        btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
-        btnforgotpassword=findViewById(R.id.btnforgotpassword);
-
-        cl=findViewById(R.id.loginConstraint);
-        // Progress dialog
+        sellerbtn = findViewById(R.id.sellerbtnid);
+        userbtn = findViewById(R.id.userbtnid);
+        signin = findViewById(R.id.loginbtnid);
+        forgot = findViewById(R.id.forgotid);
+        newuser = findViewById(R.id.newuserid);
+        emailField = findViewById(R.id.emailid1);
+        passwordField = findViewById(R.id.passid1);
+        userbtn.setActivated(true);
         pDialog = new ProgressDialog(this);
+        cl=new ConstraintLayout(getApplicationContext());
         pDialog.setCancelable(false);
-
-        // SQLite database handler
         db = new SQLiteHandler(getApplicationContext());
-
-        // Session manager
         session = new SessionManager(getApplicationContext());
         shakeAnimation = AnimationUtils.loadAnimation(getApplication(),R.anim.shake);
+        newuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent SignIn = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(SignIn);
+            }
+        });
+        sellerbtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                sellerbtn.setActivated(true);
+                userbtn.setActivated(false);
+                return true;
+            }
+        });
+        userbtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                userbtn.setActivated(true);
+                sellerbtn.setActivated(false);
+                return true;
+            }
+        });
 
-        // Check if user is already logged in or not
-        if (session.isLoggedIn()) {
-            // User is already logged in. Take him to main activity
-            Intent intent = new Intent(LoginActivity.this, Home.class);
-            startActivity(intent);
-            finish();
-        }
-
-        // Login button Click Event
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
-                String email = inputEmail.getText().toString().trim();
-                String password = inputPassword.getText().toString().trim();
+                email = emailField.getText().toString().trim();
+                password =passwordField.getText().toString().trim();
 
                 // Check for empty data in the form
                 if (!email.isEmpty() && !password.isEmpty()) {
                     // login user
-                    checkLogin(email, password);
+                    if(userbtn.isActivated()) {
+                        Toast.makeText(getApplicationContext(),"user selected",Toast.LENGTH_SHORT).show();
+                        URL_LOGIN = "http://handsinservices.com/teachingApp/Api/userLogin.php";
+                        checkLogin(email, password);
+                        SharedPref.getInstance(LoginActivity.this).UserRegiserted(true);
+                        SharedPref.getInstance(LoginActivity.this).ExpertRegiserted(false);
+
+                    }
+                    else if(sellerbtn.isActivated()) {
+                        URL_LOGIN = "http://handsinservices.com/teachingApp/Api/sellerLogin.php";
+                        checkLogin(email,password);
+                        SharedPref.getInstance(LoginActivity.this).ExpertRegiserted(true);
+                        SharedPref.getInstance(LoginActivity.this).UserRegiserted(false);
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Please select login type.", Toast.LENGTH_LONG).show();
+
+                    }
+
                 } else {
                     // Prompt user to enter credentials
                     cl.startAnimation(shakeAnimation);
-                    Toasty.error(getApplicationContext(),
+                    Toast.makeText(getApplicationContext(),
                             "Please enter the credentials!", Toast.LENGTH_LONG)
                             .show();
                 }
@@ -120,39 +126,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
-
-        // Link to Register Screen
-        btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),
-                        RegisterActivity.class);
-                overridePendingTransition(R.anim.rightenter, R.anim.leftexit);
-                if(s.equals("user"))
-                i.putExtra("check","user");
-                else if (s.equals("expert"))
-                i.putExtra("check","expert");
-
-                startActivity(i);
-
-            }
-        });
-
-        btnforgotpassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                overridePendingTransition(R.anim.rightenter, R.anim.leftexit);
-                startActivity(new Intent(LoginActivity.this,ForgotPassword.class));
-
-            }
-        });
-
-
     }
-
-    /**
-     * function to verify login details in mysql db
-     * */
     private void checkLogin(final String email, final String password) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
@@ -160,65 +134,62 @@ public class LoginActivity extends AppCompatActivity {
         pDialog.setMessage("Logging in ...");
         showDialog();
 
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                URL_LOGIN+s, new Response.Listener<String>() {
 
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                URL_LOGIN, new Response.Listener<String>() {
             @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "Login Response: " + response.toString());
+            public void onResponse(String response1) {
+                JSONObject response= null;
+                try {
+                    response = new JSONObject(response1);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+
+                    Log.d(TAG, "Login Response: " + response.getString("success"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 hideDialog();
 
                 try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
+
 
                     // Check for error node in json
-                    if (!error) {
+                    String success=response.getString("success");
+                    String name=response.getString("name");
+                    String uid=response.getString("uid");
+
+                    if (!success.equalsIgnoreCase("false")) {
                         // user successfully logged in
                         // Create login session
                         session.setLogin(true);
 
                         // Now store the user in SQLite
-                        String uid = jObj.getString("uid");
-
-                        JSONObject user = jObj.getJSONObject("user");
-                        String name = user.getString("name");
-                        String email = user.getString("email");
-                        String created_at = user
-                                .getString("created_at");
-
                         // Inserting row in users table
-                        db.addUser(name, email, uid, created_at);
-
+                        db.addUser(uid,name,email);
+                        Toast.makeText(getApplication().getBaseContext(),"login succesfull",Toast.LENGTH_LONG).show();
                         // Launch main activity
                         Intent intent = new Intent(LoginActivity.this,
                                 Home.class);
-                        if(s.equals("user")){
-
-                            SharedPref.getInstance(LoginActivity.this).UserRegiserted(true);}
-                        else if(s.equals("expert")){
-
-                            SharedPref.getInstance(LoginActivity.this).ExpertRegiserted(true);}
                         startActivity(intent);
+
 
                     } else {
                         // Error in login. Get the error message
-                        String errorMsg = jObj.getString("error_msg");
+                        String errorMsg =  response.getString("message");
                         Toast.makeText(getApplicationContext(),
                                 errorMsg, Toast.LENGTH_LONG).show();
+                        //Toast.makeText(LoginActivity.this,"Email:"+email+" password:"+password+"",Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     // JSON error
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
-
-
-
-                //
-                //
-
             }
+
         }, new Response.ErrorListener() {
 
             @Override
@@ -234,10 +205,11 @@ public class LoginActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("email", email);
-                params.put("password", password);
-                return params;
 
+                params.put("email", email);
+                params.put("passwd", password);
+
+                return params;
             }
 
         };
@@ -245,7 +217,6 @@ public class LoginActivity extends AppCompatActivity {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
-
     private void showDialog() {
         if (!pDialog.isShowing())
             pDialog.show();
@@ -256,11 +227,5 @@ public class LoginActivity extends AppCompatActivity {
             pDialog.dismiss();
     }
 
-    @Override
-    public void startActivityForResult(Intent intent, int requestCode) {
-        super.startActivityForResult(intent, requestCode);
-        overridePendingTransition(R.anim.rightenter, R.anim.leftexit);
-
-    }
 
 }

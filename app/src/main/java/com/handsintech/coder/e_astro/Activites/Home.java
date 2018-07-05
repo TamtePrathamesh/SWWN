@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.handsintech.coder.e_astro.EveryTimeRequied;
 import com.handsintech.coder.e_astro.R;
@@ -123,15 +124,15 @@ public class Home extends AppCompatActivity
             logoutUser();
         }
 
-        // Fetching user details from sqlite
-        HashMap<String, String> user = db.getUserDetails();
+//        // Fetching user details from sqlite
+       HashMap<String, String> user = db.getUserDetails();
+        String uid =user.get("uid");
+       String name = user.get("name");
+       String email = user.get("email");
 
-        String name = user.get("name");
-        String email = user.get("email");
-
-        // Displaying the user details on the screen
-        navheadername.setText(name);
-        navheader_email.setText(email);
+//        // Displaying the user details on the screen
+       navheadername.setText(name);
+       navheader_email.setText(email);
 
 
         if (!EveryTimeRequied.getInstance(Home.this).isNetworkAvailable()) {
@@ -204,7 +205,6 @@ public class Home extends AppCompatActivity
 
     private void logoutUser() {
         session.setLogin(false);
-
         db.deleteUsers();
 
 

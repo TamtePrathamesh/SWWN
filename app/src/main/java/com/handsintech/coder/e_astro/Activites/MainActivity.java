@@ -1,102 +1,95 @@
 package com.handsintech.coder.e_astro.Activites;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
-import com.handsintech.coder.e_astro.MyAdapter;
 import com.handsintech.coder.e_astro.R;
+import com.handsintech.coder.e_astro.SQLiteHandler;
+import com.handsintech.coder.e_astro.SellerSignupFragment;
 import com.handsintech.coder.e_astro.SessionManager;
+import com.handsintech.coder.e_astro.UserSignUpFragmenrt;
 
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
-
-import me.relex.circleindicator.CircleIndicator;
-
-//MAINaCTIVITYs
-public class MainActivity extends AppCompatActivity {
-
-    Button btnUserlogin,btnExpertLogin;
-    private SessionManager session;
-    private static ViewPager mPager;
-    private static int currentPage = 0;
-    private static final Integer[] XMEN= {R.drawable.intro2,R.drawable.intro3,R.drawable.intro4,R.drawable.intro5,R.drawable.intro6};
-    private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
-
-
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    Button user,seller;
+    TextView registered;
+    EditText input1,input2,input3,input4,input5;
+    SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-//        getSupportActionBar().hide();
-        session = new SessionManager(getApplicationContext());
-        // Check if user is already logged in or not
+        UserSignUpFragmenrt userfragment = new UserSignUpFragmenrt();
+        loadFragment(userfragment);
+        user=findViewById(R.id.userbtnid);
+        seller=findViewById(R.id.sellerbtnid);
+        session=new SessionManager(getApplicationContext());
+        user.setActivated(true); //default screen user
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to main activity
             Intent intent = new Intent(MainActivity.this, Home.class);
             startActivity(intent);
             finish();
         }
-
-
-        btnUserlogin=findViewById(R.id.buttonUserlogin);
-        btnExpertLogin=findViewById(R.id.buttonExpertlogin);
-
-        btnUserlogin.setOnClickListener(new View.OnClickListener() {
+        user.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                Intent i=new Intent(MainActivity.this,LoginActivity.class);
-                i.putExtra("check","user");
-                startActivity(i);
-
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+               /* user.setPressed(true);
+                seller.setPressed(false);
+               */
+                user.setActivated(true);
+                seller.setActivated(false);
+                UserSignUpFragmenrt userfragment = new UserSignUpFragmenrt();
+                loadFragment(userfragment);
+                return  true;
+            }
+        });
+        seller.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+             /*   seller.setPressed(true);
+                user.setPressed(false);*/
+                seller.setActivated(true);
+                user.setActivated(false);
+                SellerSignupFragment seller = new SellerSignupFragment();
+                loadFragment(seller);
+                return true;
             }
         });
 
-        btnExpertLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i=new Intent(MainActivity.this,LoginActivity.class);
-                i.putExtra("check","expert");
-                startActivity(i);
+        /*final CountryPickerDialog countryPicker =
+                new CountryPickerDialog(getApplicationContext() , new CountryPickerCallbacks() {
+                    @Override
+                    public void onCountrySelected(Country country, int flagResId) {
 
-            }
-        });
-
-    init();
+                    }
+                });
+        countryPicker.show();
+*/
     }
-    private void init() {
-        for(int i=0;i<XMEN.length;i++)
-            XMENArray.add(XMEN[i]);
-
-        mPager = (ViewPager) findViewById(R.id.pager);
-        mPager.setAdapter(new MyAdapter(MainActivity.this,XMENArray));
-        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        indicator.setViewPager(mPager);
-
-        // Auto start of viewpager
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable() {
-            public void run() {
-                if (currentPage == XMEN.length) {
-                    currentPage = 0;
-                }
-                mPager.setCurrentItem(currentPage++, true);
-            }
-        };
-        Timer swipeTimer = new Timer();
-        swipeTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(Update);
-            }
-        }, 2500, 2500);
+    private boolean loadFragment(Fragment fragment) {
+        //switching fragment
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.new_frame, fragment)
+                    .addToBackStack(fragment.toString())
+                    .commit();
+            return true;
+        }
+        return false;
     }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
 
 }

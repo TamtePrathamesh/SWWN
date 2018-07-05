@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.handsintech.coder.e_astro.Activites.MainActivity;
 import com.handsintech.coder.e_astro.R;
 
 //SPLASHSCREEN

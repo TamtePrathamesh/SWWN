@@ -48,5 +48,7 @@ dependencies {
     implementation 'net.gotev:uploadservice:2.1'
     implementation 'com.github.codekidX:storage-chooser:2.0.3'
 
+    implementation 'com.hbb20:ccp:2.2.2'
+
 
 }
