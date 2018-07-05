@@ -15,6 +15,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -286,6 +288,23 @@ public class Home extends AppCompatActivity
 //    getSupportFragmentManager().executePendingTransactions();
 //
 //}
+private void styleMenuButton() {
+    // Find the menu item you want to style
+    View view = findViewById(R.id.search_menu);
+
+    // Cast to a TextView instance if the menu item was found
+    if (view != null && view instanceof TextView) {
+        ((TextView) view).setTextColor( Color.BLUE ); // Make text colour blue
+        ((TextView) view).setTextSize(TypedValue.COMPLEX_UNIT_SP, 24); // Increase font size
+    }
+}
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        boolean result = super.onPrepareOptionsMenu(menu);
+        styleMenuButton();
+        return result;
+    }
 
 }
 

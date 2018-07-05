@@ -29,6 +29,7 @@
                     android:layout_height="?android:attr/actionBarSize"
                     android:background="?android:attr/colorPrimary"
                     android:textAlignment="center"
+                    app:itemIconTint="#000"
                     app:theme="@style/MyFancyTheme"
                     app:layout_scrollFlags="enterAlways|scroll"
                     app:popupTheme="@style/AppTheme.PopupOverlay" />
