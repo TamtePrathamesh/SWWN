@@ -7,23 +7,20 @@
     tools:context=".fragment_HOME">
 
 
-
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
-        android:layout_below="@+id/toolbar"
-        app:tabIndicatorColor="@color/colorPrimary"
-        app:layout_scrollFlags="scroll|enterAlways"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        >
-
-
-
+        android:layout_below="@+id/toolbar"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:tabIndicatorColor="@color/btn_register_bg"
+        app:tabSelectedTextColor="@color/btn_register_bg"
+        app:tabTextColor="#9e9e9e">
 
 
         <android.support.design.widget.TabItem
             android:id="@+id/tabItem"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="By Brands" />
@@ -33,8 +30,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="By Products" />
-
-
 
 
     </android.support.design.widget.TabLayout>

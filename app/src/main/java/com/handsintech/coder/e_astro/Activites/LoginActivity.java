@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     public static Animation shakeAnimation;
     ConstraintLayout cl;
     ProgressDialog pDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -71,6 +73,12 @@ View v;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
          v= inflater.inflate(R.layout.fragment_by_product_tab_product_details, container, false);
+
+
+
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+
+        toolbar.setTitle("Product details");
 
         pro_detail_id= this.getArguments().getString("key_id");//get your parameters
 

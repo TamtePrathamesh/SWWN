@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,7 +52,6 @@ import java.util.UUID;
 
 import es.dmoral.toasty.Toasty;
 
-import static android.support.v4.provider.FontsContractCompat.FontRequestCallback.RESULT_OK;
 
 
 
@@ -61,6 +61,8 @@ public class AskExpert extends Fragment {
     TextView proname;
    // Button btn_submit_query;
     SQLiteHandler db;
+
+    ProgressBar p;
    // String urls_req="http://handintech.000webhostapp.com/NEW_HIT/upload.php";
    String urls_req="http://handsinservices.com/teachingApp/Api/Queadd.php";
 
@@ -110,7 +112,7 @@ View v;
 
 
 
-
+p=new ProgressBar(getActivity());
 
         requestStoragePermission();
 

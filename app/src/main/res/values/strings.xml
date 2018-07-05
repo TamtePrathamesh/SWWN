@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">E-Astro</string>
+    <string name="app_name">SWWN</string>
 
-    <string name="splashhome">EAstro</string>
+    <string name="splashhome">SWWN</string>
     <string name="cmpName">Hands In Tech</string>
     <string name="button">User Login</string>
     <string name="expert_login">Expert Login</string>

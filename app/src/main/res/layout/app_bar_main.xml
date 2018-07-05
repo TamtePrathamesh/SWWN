@@ -3,6 +3,7 @@
 <android.support.design.widget.AppBarLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
 <android.support.v7.widget.Toolbar
@@ -10,6 +11,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:titleTextColor="@color/black"
+    android:layout_gravity="center_horizontal"
+    android:textAlignment="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary"
     >

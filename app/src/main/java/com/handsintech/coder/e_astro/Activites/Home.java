@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,23 +34,26 @@ import com.handsintech.coder.e_astro.tab_by_brands.fragment_brand;
 import java.util.HashMap;
 
 public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener,FragmentManager.OnBackStackChangedListener {
+        implements BottomNavigationView.OnNavigationItemSelectedListener,FragmentManager.OnBackStackChangedListener {
     SQLiteHandler db;
     Toolbar toolbar;
     SessionManager session;
-    DrawerLayout dl;
-    TextView navheadername,navheader_email;
+   RelativeLayout dl;
+  //  TextView navheadername,navheader_email;
     BottomNavigationView bm;
     Snackbar snackbar;
     String s,temp;
-   public static DrawerLayout drawer;
-    ActionBarDrawerToggle toggle;
+//   public static DrawerLayout drawer;
+//    ActionBarDrawerToggle toggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // getSupportActionBar().hide();
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("select expert");
+        toolbar.setTitleMarginStart(200);
+        toolbar.setTitleTextColor(Color.parseColor("#000000"));
 
 
 
@@ -57,7 +61,7 @@ public class Home extends AppCompatActivity
         getSupportFragmentManager().addOnBackStackChangedListener(this);
 
         db = new SQLiteHandler(getApplicationContext());
-        dl=findViewById(R.id.drawer_layout);//using this ID for displaying SnackBar
+       dl=findViewById(R.id.main_relative);//using this ID for displaying SnackBar
         session = new SessionManager(getApplicationContext());
         setSupportActionBar(toolbar);
 //       getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -104,18 +108,18 @@ public class Home extends AppCompatActivity
                 });
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_HOME()).commit();
 
-       drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-       toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+//       drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//       toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
 
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        View header = navigationView.getHeaderView(0);
-        navheadername = header.findViewById(R.id.drawer_layout_name);
-        navheader_email = header.findViewById(R.id.drawer_layout_email);
+//
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
+     //   View header = navigationView.getHeaderView(0);
+//        navheadername = header.findViewById(R.id.drawer_layout_name);
+//        navheader_email = header.findViewById(R.id.drawer_layout_email);
 //        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
 
@@ -132,8 +136,8 @@ public class Home extends AppCompatActivity
        String email = user.get("email");
 
 //        // Displaying the user details on the screen
-       navheadername.setText(name);
-       navheader_email.setText(email);
+//       navheadername.setText(name);
+//       navheader_email.setText(email);
 
 
         if (!EveryTimeRequied.getInstance(Home.this).isNetworkAvailable()) {
@@ -158,7 +162,7 @@ public class Home extends AppCompatActivity
                 if(getSupportFragmentManager().getBackStackEntryCount() > 0){
                     getSupportFragmentManager().popBackStack();
                 }else {
-                    drawer.openDrawer(GravityCompat.START);
+
                 }
             }
         });
@@ -188,18 +192,15 @@ public class Home extends AppCompatActivity
         }
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }
-            super.onBackPressed();
+
+         super.onBackPressed();
 
 
     }
@@ -266,7 +267,7 @@ public class Home extends AppCompatActivity
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }else {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            toggle.syncState();
+
         }
     }
     private void clearBackStack() {
