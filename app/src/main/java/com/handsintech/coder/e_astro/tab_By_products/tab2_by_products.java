@@ -95,7 +95,7 @@ public class tab2_by_products extends Fragment implements SearchView.OnQueryText
         // Inflate the layout for this fragment
         v= inflater.inflate(R.layout.fragment_tab2_by_products, container, false);
 
-
+//
         pb=(ProgressBar)v.findViewById(R.id.products_pb);
         pb1=(ProgressBar)v.findViewById(R.id.products_pb1);
 

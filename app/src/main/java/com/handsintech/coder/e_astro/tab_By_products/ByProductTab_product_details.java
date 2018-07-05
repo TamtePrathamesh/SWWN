@@ -64,6 +64,8 @@ public class ByProductTab_product_details extends Fragment {
     }
 View v;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

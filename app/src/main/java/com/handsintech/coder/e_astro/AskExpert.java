@@ -34,7 +34,7 @@ import com.codekidlabs.storagechooser.StorageChooser;
 import com.handsintech.coder.e_astro.Activites.Home;
 import com.handsintech.coder.e_astro.Activites.LoginActivity;
 import com.handsintech.coder.e_astro.Activites.MainActivity;
-import com.handsintech.coder.e_astro.Activites.RegisterActivity;
+
 import com.squareup.picasso.Picasso;
 
 import net.gotev.uploadservice.MultipartUploadRequest;

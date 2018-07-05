@@ -33,11 +33,17 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
 
 
+
+
+
     @NonNull
     @Override
     public CategoriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView;
         itemView = LayoutInflater.from(mCtx).inflate( R.layout.product_category_single_item, null);
+
+
+
 
         return new CategoriesViewHolder(itemView);
 

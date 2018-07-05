@@ -77,6 +77,8 @@ public class ByProductAdapter extends RecyclerView.Adapter<ByProductAdapter.ByPr
             {
 
 
+
+
                 Picasso.with(mCtx).
                         load(brands.getProduct_logo()).error(android.R.drawable.stat_notify_error).into(holder.civ);
                 holder.product_name.setText(brands.getProduct_name());

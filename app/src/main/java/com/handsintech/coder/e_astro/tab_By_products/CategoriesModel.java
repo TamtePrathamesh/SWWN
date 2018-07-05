@@ -12,7 +12,7 @@ public class CategoriesModel {
     }
 
 
-
+//
     public String getCategory_id() {
         return category_id;
     }
@@ -21,3 +21,4 @@ public class CategoriesModel {
         return categriesname;
     }
 }
+

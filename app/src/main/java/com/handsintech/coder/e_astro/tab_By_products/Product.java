@@ -8,7 +8,7 @@ public class Product {
     private String sku;
     private String product_des;
     private String product_logo;
-
+//
     public Product(String id, String product_name, String sku, String product_des, String product_logo) {
         this.id = id;
         this.product_name = product_name;

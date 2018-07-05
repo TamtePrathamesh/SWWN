@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.handsintech.coder.e_astro.EveryTimeRequied;
+import com.handsintech.coder.e_astro.Fragment_Mail;
 import com.handsintech.coder.e_astro.R;
 import com.handsintech.coder.e_astro.SQLiteHandler;
 import com.handsintech.coder.e_astro.SessionManager;
@@ -83,12 +84,12 @@ public class Home extends AppCompatActivity
                                // clearBackStack();
                                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_brand()).commit();
                                //   // viewFragment(new fragment_new_Home(), "FRAGMENT_OTHER");
-
+                                //startActivity(new Intent(Home.this, AskActivity.class));
                                 break;
                             case R.id.navigation_messages:
                                // clearBackStack();
 
-                              getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_brand()).commit();
+                              getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new Fragment_Mail()).commit();
                                 //viewFragment(new fragment_new_Home(), "FRAGMENT_OTHER");
                                 break;
                             case R.id.navigation_product_details:
