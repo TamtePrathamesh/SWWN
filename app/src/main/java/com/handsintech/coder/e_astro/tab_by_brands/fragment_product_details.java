@@ -93,6 +93,7 @@ public class fragment_product_details extends Fragment{
             }
         });
 
+
     load_product_details();
     //geturlss();
 

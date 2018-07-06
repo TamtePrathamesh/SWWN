@@ -48,6 +48,7 @@ public class fragment_brand_products extends Fragment implements SearchView.OnQu
     BrandProductAdapter adapter;
     String value;
 
+
     int page=0;
     //the recyclerview
     RecyclerView recyclerView;

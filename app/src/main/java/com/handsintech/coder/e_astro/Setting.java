@@ -26,6 +26,7 @@ public class Setting extends Fragment {
 
     SessionManager session;
     SQLiteHandler db;
+    View v;
 
     public Setting() {
         // Required empty public constructor
@@ -38,7 +39,7 @@ public class Setting extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_setting, container, false);
+       v= inflater.inflate(R.layout.fragment_setting, container, false);
 
         session=new SessionManager(getActivity());
 

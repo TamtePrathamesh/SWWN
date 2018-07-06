@@ -25,8 +25,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.handsintech.coder.e_astro.Activites.Home;
 import com.handsintech.coder.e_astro.Activites.LoginActivity;
+import com.handsintech.coder.e_astro.AppController;
 import com.handsintech.coder.e_astro.AskExpert;
 import com.handsintech.coder.e_astro.CustomVolleyRequest;
 import com.handsintech.coder.e_astro.R;
@@ -61,6 +63,8 @@ public class ByProductTab_product_details extends Fragment {
     String urls;
     String pro_detail_id="";
     public Button btn_askExpert;
+
+    JsonObjectRequest stringRequest;
 
     public ByProductTab_product_details() {
         // Required empty public constructor
@@ -148,7 +152,7 @@ View v;
     private void by_product_tab_load_product_details() {
 
 
-        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET, request_url+pro_detail_id,null,
+      stringRequest = new JsonObjectRequest(Request.Method.GET, request_url+pro_detail_id,null,
                 new Response.Listener<JSONObject>() {
                     @Override
 
@@ -231,6 +235,7 @@ View v;
                     }
                 });
 
+
         //adding our stringrequest to queue
 //        Volley.newRequestQueue(getActivity()).add(stringRequest);
         CustomVolleyRequest.getInstance(getActivity()).addToRequestQueue(stringRequest);
@@ -266,4 +271,9 @@ View v;
         setHasOptionsMenu(true);
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        AppController.getInstance().getRequestQueue().cancelAll(stringRequest);
+    }
 }
