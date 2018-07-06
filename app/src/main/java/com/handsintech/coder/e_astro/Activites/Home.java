@@ -54,7 +54,7 @@ public class Home extends AppCompatActivity
         // getSupportActionBar().hide();
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("select expert");
+        toolbar.setTitle("Select Expert");
         toolbar.setTitleMarginStart(200);
         toolbar.setTitleTextColor(Color.parseColor("#000000"));
 
