@@ -51,6 +51,8 @@
 
 
 
+
+
     <EditText
         android:id="@+id/editTextForQuery"
         android:layout_width="match_parent"
