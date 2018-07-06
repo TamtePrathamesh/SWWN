@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,6 +47,9 @@ public class Setting extends Fragment {
         profile_image_view=v.findViewById(R.id.profile_image);
         profilename_txtView=v.findViewById(R.id.profile_name);
         logouttxt=v.findViewById(R.id.profile_logout_txtview);
+
+        Toolbar bar=Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
+        bar.setTitle("Settings");
 
 
         db = new SQLiteHandler(getActivity());
