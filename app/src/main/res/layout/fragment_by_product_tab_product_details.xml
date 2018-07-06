@@ -51,6 +51,7 @@
 
 
 
+
         <TextView
             android:id="@+id/by_protab_product_details"
             android:layout_width="match_parent"

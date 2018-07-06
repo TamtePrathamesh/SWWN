@@ -18,6 +18,7 @@ public class EveryTimeRequied {
         mCtx = context;
     }
 
+
     public static synchronized EveryTimeRequied getInstance(Context context) {
         if (mInstance == null) {
             mInstance = new EveryTimeRequied(context);

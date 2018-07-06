@@ -19,6 +19,7 @@ public class Product {
 
 
 
+
     }
 
     public Product(String id, String product_name, String sku, String product_logo) {

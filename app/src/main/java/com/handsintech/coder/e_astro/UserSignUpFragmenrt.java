@@ -34,6 +34,7 @@ public class UserSignUpFragmenrt extends Fragment {
     private EditText first,email,passwd,address;
     TextView registered;
     Button register;
+
     CheckBox checkBox;
     ProgressDialog pDialog;
     CountryCodePicker ccp;

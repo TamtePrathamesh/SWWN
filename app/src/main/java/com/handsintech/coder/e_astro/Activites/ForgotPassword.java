@@ -17,6 +17,7 @@ import javax.mail.Session;
 
 public class ForgotPassword extends AppCompatActivity {
 
+
     public EditText entermailforgot;
     public Button sendmailforgot;
     public  String email="";

@@ -25,6 +25,7 @@ import java.util.HashMap;
 public class Setting extends Fragment {
 
 
+
     SessionManager session;
     SQLiteHandler db;
     View v;

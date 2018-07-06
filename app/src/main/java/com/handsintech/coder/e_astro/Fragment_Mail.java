@@ -14,6 +14,7 @@ public class Fragment_Mail extends Fragment {
 
 
 
+
     public Fragment_Mail() {
         // Required empty public constructor
     }

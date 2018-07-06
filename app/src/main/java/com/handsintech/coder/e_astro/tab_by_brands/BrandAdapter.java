@@ -34,6 +34,7 @@ private final static int FADE_DURATION = 1000;
 
 
 
+
 public BrandAdapter(Context mCtx, List<Brands> brandList) {
         this.mCtx = mCtx;
         this.brandList = brandList;

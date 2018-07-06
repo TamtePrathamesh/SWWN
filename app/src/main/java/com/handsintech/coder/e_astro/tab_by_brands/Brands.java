@@ -12,6 +12,7 @@ public class Brands {
         this.brand_logo = brand_logo;
     }
 
+
     public String getBrand_name() {
         return brand_name;
     }

@@ -34,6 +34,7 @@ public class SellerSignupFragment extends Fragment implements AdapterView.OnItem
     private EditText first,last,email,passwd,brand;
     TextView registered;
     Button register;
+
     CheckBox checkBox;
     ProgressDialog pDialog;
     String URL_REGISTER="http://handsinservices.com/teachingApp/Api/sellerRegistration.php";

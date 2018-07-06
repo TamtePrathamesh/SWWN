@@ -65,6 +65,8 @@ public class AskExpert extends Fragment {
    // Button btn_submit_query;
     SQLiteHandler db;
 
+
+
  //   ProgressBar p;
    // String urls_req="http://handintech.000webhostapp.com/NEW_HIT/upload.php";
    String urls_req="http://handsinservices.com/teachingApp/Api/Queadd.php";

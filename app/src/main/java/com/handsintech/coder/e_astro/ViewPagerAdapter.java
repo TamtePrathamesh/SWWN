@@ -30,6 +30,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     private Picasso mPicasso;
 
 
+
     public ViewPagerAdapter(List sliderImg,Context context) {
         this.sliderImg = sliderImg;
         this.context = context;

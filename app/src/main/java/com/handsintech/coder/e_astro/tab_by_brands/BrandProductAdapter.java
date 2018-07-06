@@ -34,6 +34,7 @@ public class BrandProductAdapter extends RecyclerView.Adapter<BrandProductAdapte
 
 
 
+
     public BrandProductAdapter(Context mCtx, List<BrandProduct> brandproductList) {
         this.mCtx = mCtx;
         this.brandproductList = brandproductList;

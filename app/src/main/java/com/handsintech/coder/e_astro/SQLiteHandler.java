@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 public class SQLiteHandler extends SQLiteOpenHelper {
 
+
     private static final String TAG = SQLiteHandler.class.getSimpleName();
 
     // All Static variables

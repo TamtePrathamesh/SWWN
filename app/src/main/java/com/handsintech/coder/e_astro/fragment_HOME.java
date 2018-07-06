@@ -22,6 +22,7 @@ public class fragment_HOME extends Fragment {
     private ViewPager mViewPager;
     View v;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

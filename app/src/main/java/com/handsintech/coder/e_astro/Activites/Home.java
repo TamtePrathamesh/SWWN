@@ -36,6 +36,7 @@ import com.handsintech.coder.e_astro.tab_by_brands.fragment_brand;
 
 import java.util.HashMap;
 
+
 public class Home extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener,FragmentManager.OnBackStackChangedListener {
     SQLiteHandler db;

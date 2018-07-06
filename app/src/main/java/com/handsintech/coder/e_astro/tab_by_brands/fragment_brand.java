@@ -53,6 +53,7 @@ public class fragment_brand extends Fragment  implements SearchView.OnQueryTextL
 
 
 
+
     BrandAdapter adapter;
 
     List<Brands> brandList;

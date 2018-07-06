@@ -8,6 +8,7 @@ public class SessionManager {
     // LogCat tag
     private static String TAG = SessionManager.class.getSimpleName();
 
+
     // Shared Preferences
     SharedPreferences pref;
 

@@ -65,6 +65,7 @@ public class tab2_by_products extends Fragment implements SearchView.OnQueryText
 
 
 
+
     Menu mMenu;
 
     ByProductAdapter adapter;

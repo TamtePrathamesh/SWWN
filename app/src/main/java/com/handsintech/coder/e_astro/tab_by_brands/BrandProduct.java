@@ -8,6 +8,7 @@ public class BrandProduct {
 
 
 
+
     private String brand_product_price;
 
     public BrandProduct(String brand_product_name, String brand_product_logo,String brand_product_price) {

@@ -23,6 +23,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ByProductAdapter extends RecyclerView.Adapter<ByProductAdapter.ByProductAdapterViewHolder> {
 
 
+
         private Context mCtx;
         private List<Product> mProductsList;
         private static final int LIST_ITEM = 0;

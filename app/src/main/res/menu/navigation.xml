@@ -15,6 +15,7 @@
         android:title="@string/title_dashboard"
         app:showAsAction="always|withText"/>
 
+
     <item
         android:id="@+id/navigation_messages"
         android:icon="@drawable/message_icon"

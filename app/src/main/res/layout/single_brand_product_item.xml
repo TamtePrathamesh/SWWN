@@ -12,6 +12,7 @@
         android:gravity="center"
         android:paddingTop="16dp">
 
+
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/brnd_product_logo"
             android:layout_width="70dp"

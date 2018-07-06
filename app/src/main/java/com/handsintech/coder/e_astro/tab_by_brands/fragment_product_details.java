@@ -44,6 +44,7 @@ public class fragment_product_details extends Fragment{
     List<SliderUtils> sliderImg;
     ViewPagerAdapter viewPagerAdapter;
 
+
     private String request_url="http://handintech.000webhostapp.com/NEW_HIT/brand_product_details.php?product_name=";
     ProgressBar pb;
     String urls;

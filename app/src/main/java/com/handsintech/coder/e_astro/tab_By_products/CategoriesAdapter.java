@@ -23,6 +23,7 @@ import java.util.List;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder> {
 
 
+
     private Context mCtx;
     private List<CategoriesModel> mcategoriesList;
 

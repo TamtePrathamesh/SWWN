@@ -22,6 +22,7 @@ import com.squareup.picasso.Picasso;
 public class fullImage extends Fragment {
 
 
+
     public fullImage() {
         // Required empty public constructor
     }
