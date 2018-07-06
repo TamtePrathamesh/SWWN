@@ -138,7 +138,8 @@ View v;
 
                 String temp=product_detail_name_txtview.getText().toString();
                 Bundle bundle = new Bundle();
-                bundle.putString("pro",temp); // set your parameteres
+                bundle.putString("pro",temp);
+                bundle.putString("pro_image",urls);// set your parameteres
 
                 AskExpert nextFragment = new AskExpert();
                 nextFragment.setArguments(bundle);

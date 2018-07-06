@@ -117,6 +117,8 @@ View v;
         requestStoragePermission();
 
         String pronametemp=this.getArguments().getString("pro");
+        String img_url=this.getArguments().getString("pro_image");
+        Picasso.with(getActivity()).load(img_url).into(iv);
 
       proname.setText(pronametemp);
 
