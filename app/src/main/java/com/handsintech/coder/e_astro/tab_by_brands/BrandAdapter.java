@@ -45,11 +45,11 @@ public BrandAdapter(Context mCtx, List<Brands> brandList) {
     @Override
     public BrandViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView;
-        if (viewType == LIST_ITEM){
+//        if (viewType == LIST_ITEM){
             itemView = LayoutInflater.from(mCtx).inflate( R.layout.brands_single_item, null);
-        }else{
-            itemView = LayoutInflater.from(mCtx).inflate(R.layout.brand_single_item_grid, null);
-        }
+//        }else{
+//            itemView = LayoutInflater.from(mCtx).inflate(R.layout.brand_single_item_grid, null);
+//        }
         return new BrandViewHolder(itemView);
 
     }
@@ -109,17 +109,17 @@ public BrandAdapter(Context mCtx, List<Brands> brandList) {
     }
     @Override
     public int getItemViewType (int position) {
-        if (isSwitchView){
+//        if (isSwitchView){
             return LIST_ITEM;
-        }else{
-            return GRID_ITEM;
-        }
+//        }else{
+//            return GRID_ITEM;
+//        }
     }
 
-    public boolean toggleItemViewType () {
-        isSwitchView = !isSwitchView;
-        return isSwitchView;
-    }
+//    public boolean toggleItemViewType () {
+//        isSwitchView = !isSwitchView;
+//        return isSwitchView;
+//    }
     private void setFadeAnimation(View view, int position) {
         AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
         anim.setDuration(FADE_DURATION);

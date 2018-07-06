@@ -27,7 +27,7 @@ public class ByProductAdapter extends RecyclerView.Adapter<ByProductAdapter.ByPr
         private List<Product> mProductsList;
         private static final int LIST_ITEM = 0;
         private static final int GRID_ITEM = 1;
-        boolean isSwitchView = true;
+//        boolean isSwitchView = true;
         private List<Product> mProductListFiltered;
         private final static int FADE_DURATION = 1000;
 
@@ -45,11 +45,11 @@ public class ByProductAdapter extends RecyclerView.Adapter<ByProductAdapter.ByPr
         @Override
         public ByProductAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View itemView;
-            if (viewType == LIST_ITEM){
-                itemView = LayoutInflater.from(mCtx).inflate( R.layout.product_single_item, null);
-            }else{
+//            if (viewType == LIST_ITEM){
+//                itemView = LayoutInflater.from(mCtx).inflate( R.layout.product_single_item, null);
+//            }else{
                 itemView = LayoutInflater.from(mCtx).inflate(R.layout.product_single_grid, null);
-            }
+          //  }
             return new ByProductAdapterViewHolder(itemView);
 
         }
@@ -73,26 +73,26 @@ public class ByProductAdapter extends RecyclerView.Adapter<ByProductAdapter.ByPr
 
             Log.d("url", done);
 
-            if(isSwitchView)
-            {
-
-
-
-
-                Picasso.with(mCtx).
-                        load(brands.getProduct_logo()).error(android.R.drawable.stat_notify_error).into(holder.civ);
-                holder.product_name.setText(brands.getProduct_name());
-                holder.product_des.setText(brands.getProduct_des());
-
-
-            }
-            else
-            {
+//            if(isSwitchView)
+//            {
+//
+//
+//
+//
+//                Picasso.with(mCtx).
+//                        load(brands.getProduct_logo()).error(android.R.drawable.stat_notify_error).into(holder.civ);
+//                holder.product_name.setText(brands.getProduct_name());
+//                holder.product_des.setText(brands.getProduct_des());
+//
+//
+//            }
+//            else
+//            {
                 Picasso.with(mCtx).
                         load(brands.getProduct_logo()).error(android.R.drawable.stat_notify_error).into(holder.im);
                 holder.product_name.setText(brands.getProduct_name());
               //  holder.product_des.setText(brands.getProduct_des());
-            }
+           // }
 
 
 
@@ -116,23 +116,23 @@ public class ByProductAdapter extends RecyclerView.Adapter<ByProductAdapter.ByPr
             public ByProductAdapterViewHolder(View itemView) {
                 super(itemView);
 
-                if(isSwitchView)
-                {
-
-
-
-                    civ = itemView.findViewById(R.id.product_logo);
-                    product_name = itemView.findViewById(R.id.product_name);
-                    product_des=itemView.findViewById(R.id.product_desc);
-
-
-                }
-                else
-                {
+//                if(isSwitchView)
+//                {
+//
+//
+//
+//                    civ = itemView.findViewById(R.id.product_logo);
+//                    product_name = itemView.findViewById(R.id.product_name);
+//                    product_des=itemView.findViewById(R.id.product_desc);
+//
+//
+//                }
+//                else
+//                {
                     im=itemView.findViewById(R.id.img_product_logo);
                     product_name = itemView.findViewById(R.id.product_name);
                    // product_des=itemView.findViewById(R.id.product_desc);
-                }
+              // }
 
 
 
@@ -145,17 +145,17 @@ public class ByProductAdapter extends RecyclerView.Adapter<ByProductAdapter.ByPr
         }
         @Override
         public int getItemViewType (int position) {
-            if (isSwitchView){
-                return LIST_ITEM;
-            }else{
+//            if (isSwitchView){
+//                return LIST_ITEM;
+//            }else{
                 return GRID_ITEM;
-            }
+           // }
         }
 
-        public boolean toggleItemViewType () {
-            isSwitchView = !isSwitchView;
-            return isSwitchView;
-        }
+//        public boolean toggleItemViewType () {
+//            isSwitchView = !isSwitchView;
+//            return isSwitchView;
+//        }
         private void setFadeAnimation(View view, int position) {
             AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
             anim.setDuration(FADE_DURATION);

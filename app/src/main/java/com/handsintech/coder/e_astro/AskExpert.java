@@ -48,18 +48,23 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import es.dmoral.toasty.Toasty;
 
+
+
+
 public class AskExpert extends Fragment {
 
     String tag_string_req = "req_register",uid,question;
-    TextView proname;
+    TextView proname,selectedfilename;
    // Button btn_submit_query;
     SQLiteHandler db;
+
  //   ProgressBar p;
    // String urls_req="http://handintech.000webhostapp.com/NEW_HIT/upload.php";
    String urls_req="http://handsinservices.com/teachingApp/Api/Queadd.php";
@@ -68,6 +73,9 @@ public class AskExpert extends Fragment {
     ImageView iv;
     private Button btn_submit_query,btnselectimage;
     private EditText editText;
+
+
+
 
     //Image request code
     private int PICK_IMAGE_REQUEST = 1;
@@ -115,6 +123,10 @@ View v;
 //p=new ProgressBar(getActivity());
 
         requestStoragePermission();
+
+
+        selectedfilename=v.findViewById(R.id.selectedfilename);
+
 
         String pronametemp=this.getArguments().getString("pro");
         String img_url=this.getArguments().getString("pro_image");
@@ -230,10 +242,17 @@ View v;
 
 //
                 try {
+                    String tempfilename=PathUtil.getPath(getActivity(),filePath);
+                    File f=new File(tempfilename);
+                    String namess=f.getName();
+                    selectedfilename.setText(namess);
+
                     bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), filePath);
                   //  imageView.setImageBitmap(bitmap);
-                    Toast.makeText(getActivity(),"File selected", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(),"File selected", Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }
 
@@ -262,8 +281,7 @@ View v;
                         .setNotificationConfig(new UploadNotificationConfig())
                         .setMaxRetries(2)
                         .startUpload(); //Starting the upload
-            Toasty.success(getActivity(), "Query submitted successfully..", Toast.LENGTH_LONG).show();
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_HOME()).commit();
+
            // if (p.isShowing())
                 p.dismiss();
 
@@ -302,8 +320,7 @@ public void newupload()
 
                         if (p.isShowing())
                             p.dismiss();
-                        Toasty.success(getActivity(), "Query submitted successfully..", Toast.LENGTH_LONG).show();
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_HOME()).commit();
+                        Toasty.success(getActivity(), "done", Toast.LENGTH_LONG).show();
 
                     }
                 } catch (JSONException e) {
@@ -341,3 +358,9 @@ public void newupload()
     AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
         }
     }
+
+
+
+
+    
+

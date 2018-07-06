@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -64,7 +65,7 @@ public class tab2_by_products extends Fragment implements SearchView.OnQueryText
 
 
 
-
+    Menu mMenu;
 
     ByProductAdapter adapter;
     CategoriesAdapter mCategoriesAdapter;
@@ -103,7 +104,9 @@ public class tab2_by_products extends Fragment implements SearchView.OnQueryText
         category_recyclerView=v.findViewById(R.id.product_category_recycler_view);
         setHasOptionsMenu(true);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+      //  recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         LinearLayoutManager lm=new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
         lm.setAutoMeasureEnabled(true);
        // category_recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -406,7 +409,7 @@ public class tab2_by_products extends Fragment implements SearchView.OnQueryText
                         return true; // Return true to expand action view
                     }
                 });
-
+        this.mMenu=menu;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -426,13 +429,16 @@ public class tab2_by_products extends Fragment implements SearchView.OnQueryText
 //
 //                break;
 //        }
-        if (id == R.id.action_settings) {
-            getActivity().supportInvalidateOptionsMenu();
-            boolean isSwitched = adapter.toggleItemViewType();
-            recyclerView.setLayoutManager(isSwitched ? new LinearLayoutManager(getActivity()) : new GridLayoutManager(getActivity(), 2));
-            adapter.notifyDataSetChanged();
-
-        }
+//        if (id == R.id.action_settings) {
+//            getActivity().supportInvalidateOptionsMenu();
+//            boolean isSwitched = adapter.toggleItemViewType();
+//            recyclerView.setLayoutManager(isSwitched ? new LinearLayoutManager(getActivity()) : new GridLayoutManager(getActivity(), 2));
+//            adapter.notifyDataSetChanged();
+//            item.setIcon(R.drawable.ic_widgets_black_24dp);
+//            mMenu.getItem(1).setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_widgets_black_24dp));
+//
+//
+//        }
         if (id == R.id.search_menu) {
 
             return true;

@@ -45,11 +45,11 @@ public class BrandProductAdapter extends RecyclerView.Adapter<BrandProductAdapte
     @Override
     public BrandProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView;
-        if (viewType == LIST_ITEM){
+//        if (viewType == LIST_ITEM){
             itemView = LayoutInflater.from(mCtx).inflate( R.layout.single_brand_product_item, null);
-        }else{
-            itemView = LayoutInflater.from(mCtx).inflate(R.layout.single_brand_product_grid_item, null);
-        }
+//        }else{
+//            itemView = LayoutInflater.from(mCtx).inflate(R.layout.single_brand_product_grid_item, null);
+//        }
         return new BrandProductViewHolder(itemView);
 
     }
@@ -111,21 +111,21 @@ public class BrandProductAdapter extends RecyclerView.Adapter<BrandProductAdapte
 
         public BrandProductViewHolder(View itemView) {
             super(itemView);
-            if(isSwitchView)
-            {
+//            if(isSwitchView)
+//            {
 
                 civ = itemView.findViewById(R.id.brnd_product_logo);
                 brand_name = itemView.findViewById(R.id.brnd_product_name);
                 brand_price=itemView.findViewById(R.id.brnd_product_price);
 
 
-            }
-            else
-            {
-                im=itemView.findViewById(R.id.brnd_product_logo);
-                brand_name = itemView.findViewById(R.id.brnd_product_name);
-                brand_price=itemView.findViewById(R.id.brnd_product_price);
-            }
+//            }
+//            else
+//            {
+//                im=itemView.findViewById(R.id.brnd_product_logo);
+//                brand_name = itemView.findViewById(R.id.brnd_product_name);
+//                brand_price=itemView.findViewById(R.id.brnd_product_price);
+//            }
 
 
 
@@ -143,17 +143,17 @@ public class BrandProductAdapter extends RecyclerView.Adapter<BrandProductAdapte
     }
     @Override
     public int getItemViewType (int position) {
-        if (isSwitchView){
+//        if (isSwitchView){
             return LIST_ITEM;
-        }else{
-            return GRID_ITEM;
-        }
+//        }else{
+//            return GRID_ITEM;
+//        }
     }
 
-    public boolean toggleItemViewType () {
-        isSwitchView = !isSwitchView;
-        return isSwitchView;
-    }
+//    public boolean toggleItemViewType () {
+//        isSwitchView = !isSwitchView;
+//        return isSwitchView;
+//    }
     private void setFadeAnimation(View view, int position) {
         AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
         anim.setDuration(FADE_DURATION);

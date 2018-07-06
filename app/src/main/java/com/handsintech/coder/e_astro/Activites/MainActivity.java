@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.new_frame, fragment)
-                    .addToBackStack(fragment.toString())
                     .commit();
             return true;
         }

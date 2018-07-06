@@ -415,13 +415,13 @@ public class fragment_brand extends Fragment  implements SearchView.OnQueryTextL
 //
 //                break;
 //        }
-        if (id == R.id.action_settings) {
-            getActivity().supportInvalidateOptionsMenu();
-            boolean isSwitched = adapter.toggleItemViewType();
-            recyclerView.setLayoutManager(isSwitched ? new LinearLayoutManager(getActivity()) : new GridLayoutManager(getActivity(), 2));
-            adapter.notifyDataSetChanged();
-
-        }
+//        if (id == R.id.action_settings) {
+//            getActivity().supportInvalidateOptionsMenu();
+//            boolean isSwitched = adapter.toggleItemViewType();
+//            recyclerView.setLayoutManager(isSwitched ? new LinearLayoutManager(getActivity()) : new GridLayoutManager(getActivity(), 2));
+//            adapter.notifyDataSetChanged();
+//
+//        }
         if (id == R.id.search_menu) {
 
             return true;
