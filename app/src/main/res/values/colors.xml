@@ -4,15 +4,6 @@
     <!--<color name="colorPrimaryDark">#303F9F</color>-->
     <!--<color name="colorAccent">#FF4081</color>-->
 
-
-
-
-
-
-
-
-
-
         <!--<color name="primary">#607D8B</color>-->
     <color name="colorPrimary">#fafafa</color>
         <color name="colorPrimaryDark">#455A64</color>
@@ -22,7 +13,9 @@
         <color name="secondary_text">#757575</color>
         <color name="icons">#FFFFFF</color>
         <color name="divider">#BDBDBD</color>
+    <color name="askExpert">#F396C3</color>
     <color name="btn_register_bg">#FC9A8C</color>
+    <color name="submit_expert">#E89CC0</color>
     <color name="toggle_user">#FDD0CD</color>
     <color name="bg_login">#26ae90</color>
     <color name="bg_register">#2e3237</color>
