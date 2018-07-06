@@ -23,8 +23,10 @@
     <ImageView
         android:id="@+id/pro_imageView2"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
+        android:layout_height="216dp"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+
         android:src="@drawable/swwn"
         android:layout_margin="10dp"/>
 
