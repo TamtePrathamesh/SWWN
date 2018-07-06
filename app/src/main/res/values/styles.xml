@@ -46,7 +46,10 @@
 
     </style>
 
-
+    <style name="TextAppearance.FontPath" parent="android:TextAppearance">
+        <!-- Custom Attr-->
+        <item name="fontPath">peach-sundress.ttf</item>
+    </style>
 
 
 

@@ -1,8 +1,7 @@
 package com.handsintech.coder.e_astro.tab_By_products;
 
 
-import android.content.res.AssetManager;
-import android.graphics.Typeface;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -44,7 +43,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -62,7 +60,7 @@ public class ByProductTab_product_details extends Fragment {
     ViewPagerAdapter viewPagerAdapter;
 
     private String request_url="https://socialworldwidenetwork.com/productview.php?product_id=";
-    ProgressBar pb;
+    ProgressDialog pb;
     String urls;
     String pro_detail_id="";
     public Button btn_askExpert;
@@ -72,7 +70,7 @@ public class ByProductTab_product_details extends Fragment {
     public ByProductTab_product_details() {
         // Required empty public constructor
     }
-View v;
+    View v;
 
 
 
@@ -80,13 +78,8 @@ View v;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         v= inflater.inflate(R.layout.fragment_by_product_tab_product_details, container, false);
-       /* AssetManager am = getActivity().getApplicationContext().getAssets();
+        v= inflater.inflate(R.layout.fragment_by_product_tab_product_details, container, false);
 
-        Typeface typeface = Typeface.createFromAsset(am,
-                String.format(Locale.US, "fonts/%s", "OpenSans-Light.ttf"));
-
-        setTypeface(typeface);*/
 
         Toolbar bar=Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
         bar.setTitle("Product details");
@@ -111,7 +104,11 @@ View v;
 
         mViewPager=v.findViewById(R.id.by_protab_product_detail_viewPager);
         sliderImg = new ArrayList<>();
-        pb=v.findViewById(R.id.by_protab_product_detail_pb);
+        pb=new ProgressDialog(getActivity());
+        pb.setCancelable(false);
+        pb.setMessage("Loading");
+        pb.show();
+
 
         sliderDotspanel = (LinearLayout)v.findViewById(R.id.by_productTab_SliderDots);
 
@@ -126,10 +123,10 @@ View v;
             public void onPageSelected(int position) {
 
                 for(int i = 0; i< dotscount; i++){
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_not_selected));
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot));
                 }
 
-                dots[position].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_blue_over));
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_over));
 
             }
 
@@ -161,7 +158,7 @@ View v;
     private void by_product_tab_load_product_details() {
 
 
-      stringRequest = new JsonObjectRequest(Request.Method.GET, request_url+pro_detail_id,null,
+        stringRequest = new JsonObjectRequest(Request.Method.GET, request_url+pro_detail_id,null,
                 new Response.Listener<JSONObject>() {
                     @Override
 
@@ -172,62 +169,62 @@ View v;
                             JSONObject array = response.getJSONObject("message");
 
 
-                                //traversing through all the object
+                            //traversing through all the object
 //                                for (int i = 0; i < array.length(); i++) {
 
-                                    //getting product object from json array
-                                   // JSONObject product = array.getJSONObject(i);
+                            //getting product object from json array
+                            // JSONObject product = array.getJSONObject(i);
 
 
-                                    pb.setVisibility(View.GONE);
+                            pb.dismiss();
 
-                                    //adding the product to product list
-                                    urls=array.getString("small_image");
-                                    String tempname=array.getString("name");
-                                    String tempdes=array.getString("description");
+                            //adding the product to product list
+                            urls=array.getString("small_image");
+                            String tempname=array.getString("name");
+                            String tempdes=array.getString("description");
 
-                                    product_detail_name_txtview.setText(tempname);
-                                    product_details_txtview.setText(tempdes);
+                            product_detail_name_txtview.setText(tempname);
+                            product_details_txtview.setText(tempdes);
                             btn_askExpert.setVisibility(View.VISIBLE);
 
 
 //
 
-                           //     }
-                                List<String> extractedUrls = extractUrls(urls);
-                                for (String url : extractedUrls)
-                                {
+                            //     }
+                            List<String> extractedUrls = extractUrls(urls);
+                            for (String url : extractedUrls)
+                            {
 
-                                    SliderUtils sliderUtils = new SliderUtils();
-                                    sliderUtils.setSliderImageUrl(url);
-                                    sliderImg.add(sliderUtils);
-                                }
-                                viewPagerAdapter = new ViewPagerAdapter(sliderImg, getActivity());
+                                SliderUtils sliderUtils = new SliderUtils();
+                                sliderUtils.setSliderImageUrl(url);
+                                sliderImg.add(sliderUtils);
+                            }
+                            viewPagerAdapter = new ViewPagerAdapter(sliderImg, getActivity());
 
-                                mViewPager.setAdapter(viewPagerAdapter);
+                            mViewPager.setAdapter(viewPagerAdapter);
 
-                                dotscount = viewPagerAdapter.getCount();
-                                dots = new ImageView[dotscount];
+                            dotscount = viewPagerAdapter.getCount();
+                            dots = new ImageView[dotscount];
 
-                                for(int i = 0; i < dotscount; i++){
+                            for(int i = 0; i < dotscount; i++){
 
-                                    dots[i] = new ImageView(getActivity());
-                                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_not_selected));
+                                dots[i] = new ImageView(getActivity());
+                                dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_not_selected));
 
-                                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                                    params.setMargins(8, 0, 8, 0);
+                                params.setMargins(8, 0, 8, 0);
 
-                                    sliderDotspanel.addView(dots[i], params);
+                                sliderDotspanel.addView(dots[i], params);
 
-                                }
+                            }
 
-                                dots[0].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_blue_over));
+                            dots[0].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_blue_over));
 
 
 
                         } catch(JSONException e){
-                            pb.setVisibility(View.GONE);
+                            pb.dismiss();
                             //Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
                             Log.d("details",e.toString());
                         }
@@ -238,7 +235,7 @@ View v;
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        pb.setVisibility(View.GONE);
+                        pb.dismiss();
                         Toast.makeText(getContext(), "Request Timeout, Please try again.", Toast.LENGTH_SHORT).show();
 
                     }
