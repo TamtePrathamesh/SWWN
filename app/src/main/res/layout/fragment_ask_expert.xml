@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/icons"
+    android:orientation="vertical">
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/icons"
     android:weightSum="10">
@@ -35,6 +42,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="5dp"
         android:paddingRight="25dp"
+        android:fontFamily="@fonts/OpenSans-Light"
         android:text="ASK QUESTIONS"
         android:textStyle="bold"
         android:textSize="16dp"
@@ -49,12 +57,13 @@
         android:gravity="top"
         android:background="@drawable/square_edittext"
         android:paddingLeft="5dp"
+        android:fontFamily="@fonts/OpenSans-Light"
         android:paddingRight="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:hint="start typing here..."
+        android:hint="start typing your Question..."
         android:textSize="14sp"
         />
     <LinearLayout
@@ -94,7 +103,7 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:layout_weight="2"
         android:background="@drawable/rounded_buttons"
         android:paddingLeft="30dp"
@@ -103,3 +112,4 @@
         android:gravity="center"
         android:textColor="@color/icons" />
 </LinearLayout>
+</ScrollView>

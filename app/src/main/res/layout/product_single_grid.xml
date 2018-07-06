@@ -35,15 +35,18 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/img_product_logo"
                 android:paddingLeft="@dimen/album_title_padding"
+                android:fontFamily="@fonts/OpenSans-Light"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"
                 android:textColor="@color/album_title"
                 android:textSize="@dimen/album_title" />
+
             <TextView
                 android:id="@+id/product_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/product_name"
+                android:fontFamily="@fonts/OpenSans-Light"
                 android:paddingLeft="@dimen/album_title_padding"
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding"

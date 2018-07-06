@@ -23,6 +23,7 @@
             android:layout_below="@id/brnd_product_logo"
             android:paddingLeft="@dimen/album_title_padding"
             android:paddingRight="@dimen/album_title_padding"
+            android:fontFamily="@fonts/OpenSans-Light"
             android:paddingTop="@dimen/album_title_padding"
             android:textColor="@color/album_title"
             android:textSize="@dimen/album_title"
@@ -33,6 +34,8 @@
             android:id="@+id/by_protab_product_detail_viewPager"
             android:layout_width="match_parent"
             android:layout_height="216dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/swwn"
             android:layout_marginTop="137dp">
 
         </android.support.v4.view.ViewPager>
@@ -52,20 +55,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/navigation"
-
             android:layout_below="@+id/by_productTab_SliderDots"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginTop="20sp"
+            android:fontFamily="@fonts/OpenSans-Light"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="20sp"
             android:inputType="textMultiLine"
-
             android:text=""
             android:textSize="18sp" />
-
-
-
-
 
 
         <Button
@@ -81,18 +79,16 @@
             android:text="Ask Expert"
             android:textColor="@color/white" />
 
-        <!--<ProgressBar-->
-            <!--android:id="@+id/by_protab_product_detail_pb"-->
-            <!--style="?android:attr/progressBarStyle"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_marginStart="168dp" />-->
-
-
+        <ProgressBar
+            android:id="@+id/by_protab_product_detail_pb"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="168dp" />
+        
     </RelativeLayout>
-
 
 </LinearLayout>
 </ScrollView>

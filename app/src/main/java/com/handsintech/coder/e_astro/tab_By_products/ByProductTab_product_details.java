@@ -1,7 +1,8 @@
 package com.handsintech.coder.e_astro.tab_By_products;
 
 
-import android.app.ProgressDialog;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,6 +44,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,7 +62,7 @@ public class ByProductTab_product_details extends Fragment {
     ViewPagerAdapter viewPagerAdapter;
 
     private String request_url="https://socialworldwidenetwork.com/productview.php?product_id=";
-    ProgressDialog pb;
+    ProgressBar pb;
     String urls;
     String pro_detail_id="";
     public Button btn_askExpert;
@@ -79,7 +81,12 @@ View v;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
          v= inflater.inflate(R.layout.fragment_by_product_tab_product_details, container, false);
+       /* AssetManager am = getActivity().getApplicationContext().getAssets();
 
+        Typeface typeface = Typeface.createFromAsset(am,
+                String.format(Locale.US, "fonts/%s", "OpenSans-Light.ttf"));
+
+        setTypeface(typeface);*/
 
         Toolbar bar=Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
         bar.setTitle("Product details");
@@ -104,11 +111,7 @@ View v;
 
         mViewPager=v.findViewById(R.id.by_protab_product_detail_viewPager);
         sliderImg = new ArrayList<>();
-        pb=new ProgressDialog(getActivity());
-        pb.setCancelable(false);
-        pb.setMessage("Loading");
-        pb.show();
-
+        pb=v.findViewById(R.id.by_protab_product_detail_pb);
 
         sliderDotspanel = (LinearLayout)v.findViewById(R.id.by_productTab_SliderDots);
 
@@ -123,10 +126,10 @@ View v;
             public void onPageSelected(int position) {
 
                 for(int i = 0; i< dotscount; i++){
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot));
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_not_selected));
                 }
 
-                dots[position].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_over));
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.dot_blue_over));
 
             }
 
@@ -176,7 +179,7 @@ View v;
                                    // JSONObject product = array.getJSONObject(i);
 
 
-                                    pb.dismiss();
+                                    pb.setVisibility(View.GONE);
 
                                     //adding the product to product list
                                     urls=array.getString("small_image");
@@ -224,7 +227,7 @@ View v;
 
 
                         } catch(JSONException e){
-                            pb.dismiss();
+                            pb.setVisibility(View.GONE);
                             //Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
                             Log.d("details",e.toString());
                         }
@@ -235,7 +238,7 @@ View v;
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        pb.dismiss();
+                        pb.setVisibility(View.GONE);
                         Toast.makeText(getContext(), "Request Timeout, Please try again.", Toast.LENGTH_SHORT).show();
 
                     }

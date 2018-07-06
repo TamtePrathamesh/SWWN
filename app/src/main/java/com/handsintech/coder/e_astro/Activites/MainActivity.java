@@ -1,5 +1,6 @@
 package com.handsintech.coder.e_astro.Activites;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,15 +17,23 @@ import com.handsintech.coder.e_astro.SellerSignupFragment;
 import com.handsintech.coder.e_astro.SessionManager;
 import com.handsintech.coder.e_astro.UserSignUpFragmenrt;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button user,seller;
     TextView registered;
     EditText input1,input2,input3,input4,input5;
     SessionManager session;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+       // TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "fonts/your_font_file.ttf");
         UserSignUpFragmenrt userfragment = new UserSignUpFragmenrt();
         loadFragment(userfragment);
         user=findViewById(R.id.userbtnid);

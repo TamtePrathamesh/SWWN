@@ -47,7 +47,7 @@ dependencies {
     implementation 'com.bogdwellers:pinchtozoom:0.1'
     implementation 'net.gotev:uploadservice:2.1'
     implementation 'com.github.codekidX:storage-chooser:2.0.3'
-
+    implementation 'uk.co.chrisjenx:calligraphy:2.2.0'
     implementation 'com.hbb20:ccp:2.2.2'
 
 
