@@ -54,16 +54,12 @@ import java.util.UUID;
 
 import es.dmoral.toasty.Toasty;
 
-
-
-
 public class AskExpert extends Fragment {
 
     String tag_string_req = "req_register",uid,question;
     TextView proname;
    // Button btn_submit_query;
     SQLiteHandler db;
-
  //   ProgressBar p;
    // String urls_req="http://handintech.000webhostapp.com/NEW_HIT/upload.php";
    String urls_req="http://handsinservices.com/teachingApp/Api/Queadd.php";
@@ -72,9 +68,6 @@ public class AskExpert extends Fragment {
     ImageView iv;
     private Button btn_submit_query,btnselectimage;
     private EditText editText;
-
-
-
 
     //Image request code
     private int PICK_IMAGE_REQUEST = 1;
@@ -122,10 +115,6 @@ View v;
 //p=new ProgressBar(getActivity());
 
         requestStoragePermission();
-
-
-
-
 
         String pronametemp=this.getArguments().getString("pro");
 
@@ -271,7 +260,8 @@ View v;
                         .setNotificationConfig(new UploadNotificationConfig())
                         .setMaxRetries(2)
                         .startUpload(); //Starting the upload
-
+            Toasty.success(getActivity(), "Query submitted successfully..", Toast.LENGTH_LONG).show();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_HOME()).commit();
            // if (p.isShowing())
                 p.dismiss();
 
@@ -310,7 +300,8 @@ public void newupload()
 
                         if (p.isShowing())
                             p.dismiss();
-                        Toasty.success(getActivity(), "done", Toast.LENGTH_LONG).show();
+                        Toasty.success(getActivity(), "Query submitted successfully..", Toast.LENGTH_LONG).show();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_HOME()).commit();
 
                     }
                 } catch (JSONException e) {
@@ -348,9 +339,3 @@ public void newupload()
     AppController.getInstance().addToRequestQueue(stringRequest, tag_string_req);
         }
     }
-
-
-
-
-    
-
