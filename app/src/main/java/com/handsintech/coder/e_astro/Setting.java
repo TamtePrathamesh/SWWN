@@ -55,11 +55,11 @@ public class Setting extends Fragment {
         HashMap<String, String> user = db.getUserDetails();
 
         String name = user.get("name");
-       // String email = user.get("email");
+       String email = user.get("email");
 
         // Displaying the user details on the screen
         profilename_txtView.setText(name);
-       // navheader_email.setText(email);
+      // navheader_email.setText(email);
 
 
         int color = generator.getColor(name);

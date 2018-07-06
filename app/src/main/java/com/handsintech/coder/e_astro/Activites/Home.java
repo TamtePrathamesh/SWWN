@@ -31,6 +31,7 @@ import com.handsintech.coder.e_astro.SessionManager;
 import com.handsintech.coder.e_astro.Setting;
 import com.handsintech.coder.e_astro.SharedPref;
 import com.handsintech.coder.e_astro.fragment_HOME;
+import com.handsintech.coder.e_astro.tab_By_products.tab2_by_products;
 import com.handsintech.coder.e_astro.tab_by_brands.fragment_brand;
 
 import java.util.HashMap;
@@ -88,7 +89,7 @@ public class Home extends AppCompatActivity
                                 break;
                             case R.id.navigation_ask:
                                // clearBackStack();
-                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new fragment_brand()).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new tab2_by_products()).commit();
                                //   // viewFragment(new fragment_new_Home(), "FRAGMENT_OTHER");
                                 //startActivity(new Intent(Home.this, AskActivity.class));
                                 break;
@@ -164,7 +165,7 @@ public class Home extends AppCompatActivity
                 if(getSupportFragmentManager().getBackStackEntryCount() > 0){
                     getSupportFragmentManager().popBackStack();
                 }else {
-                        toolbar.setTitle("select expert");
+
                 }
             }
         });

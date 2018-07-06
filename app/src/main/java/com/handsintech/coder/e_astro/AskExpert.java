@@ -3,6 +3,7 @@ package com.handsintech.coder.e_astro;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -58,17 +59,16 @@ import es.dmoral.toasty.Toasty;
 
 public class AskExpert extends Fragment {
 
-    String tag_string_req = "req_register";
+    String tag_string_req = "req_register",uid,question;
     TextView proname;
    // Button btn_submit_query;
     SQLiteHandler db;
 
-    ProgressBar p;
+ //   ProgressBar p;
    // String urls_req="http://handintech.000webhostapp.com/NEW_HIT/upload.php";
    String urls_req="http://handsinservices.com/teachingApp/Api/Queadd.php";
-
+   public ProgressDialog p;
     Intent intent;
-
     ImageView iv;
     private Button btn_submit_query,btnselectimage;
     private EditText editText;
@@ -109,15 +109,17 @@ View v;
 //        Log.d("track",singleimg_url);
         iv=v.findViewById(R.id.pro_imageView2);
         db=new SQLiteHandler(getActivity());
-
+        HashMap<String,String> user=db.getUserDetails();
+        uid=user.get("uid");
         editText = (EditText)v.findViewById(R.id.editTextForQuery);
         proname=v.findViewById(R.id.pro_name_for_query);
         btn_submit_query=v.findViewById(R.id.buttonSubmitQuery);
         btnselectimage=v.findViewById(R.id.buttonChoose);
+       p=new ProgressDialog(v.getContext());
+       p.setCancelable(false);
+       p.setMessage("Uploading....");
 
-
-
-p=new ProgressBar(getActivity());
+//p=new ProgressBar(getActivity());
 
         requestStoragePermission();
 
@@ -132,6 +134,8 @@ p=new ProgressBar(getActivity());
         btn_submit_query.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               // if (!p.isShowing())
+                    p.show();
             if(filePath!=null){
             uploadMultipart();}
             else{newupload();}
@@ -253,7 +257,7 @@ p=new ProgressBar(getActivity());
 
         //getting the actual path of the image
         String path = getPath(filePath);
-
+        question=editText.getText().toString().trim();
         //Uploading code
         try {
 
@@ -262,13 +266,14 @@ p=new ProgressBar(getActivity());
                 //Creating a multi part request
                 new MultipartUploadRequest(getActivity(), uploadId, urls_req)
                         .addFileToUpload(path, "imageorvideo") //Adding file
-                        .addParameter("userId", "13_img")
-                        .addParameter("quetion", "???_img")//Adding text parameter to the request
+                        .addParameter("userId", uid)
+                        .addParameter("quetion", question)//Adding text parameter to the request
                         .setNotificationConfig(new UploadNotificationConfig())
                         .setMaxRetries(2)
                         .startUpload(); //Starting the upload
 
-
+           // if (p.isShowing())
+                p.dismiss();
 
             } catch(Exception exc){
                 Toast.makeText(getActivity(), exc.getMessage(), Toast.LENGTH_SHORT).show();
@@ -279,7 +284,7 @@ p=new ProgressBar(getActivity());
 
 public void newupload()
 {
-
+        question=editText.getText().toString().trim();
         String uploadId = UUID.randomUUID().toString();
 
         //Creating a multi part request
@@ -303,7 +308,8 @@ public void newupload()
                         // User successfully stored in MySQL
                         // Now store the user in sqlite
 
-
+                        if (p.isShowing())
+                            p.dismiss();
                         Toasty.success(getActivity(), "done", Toast.LENGTH_LONG).show();
 
                     }
@@ -316,6 +322,8 @@ public void newupload()
 
             @Override
             public void onErrorResponse(VolleyError error) {
+               // if (p.isShowing())
+                    p.dismiss();
                 Log.e("e1", "Registration Error: " + error.getMessage());
                 Toasty.error(getActivity(),"check your network connection",
                         Toast.LENGTH_LONG).show();
@@ -327,8 +335,8 @@ public void newupload()
             protected Map<String, String> getParams() {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("userId", "13_no");
-                params.put("quetion", "??_no");
+                params.put("userId", uid);
+                params.put("quetion", question);
 
 
                 return params;

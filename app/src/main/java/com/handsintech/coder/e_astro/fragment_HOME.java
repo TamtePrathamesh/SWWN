@@ -31,9 +31,10 @@ public class fragment_HOME extends Fragment {
         mViewPager = (ViewPager)v. findViewById(R.id.container1);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+
         TabLayout tabLayout = (TabLayout)v. findViewById(R.id.tabs);
         Toolbar bar=Toolbar.class.cast(getActivity().findViewById(R.id.toolbar));
-        bar.setTitle("select expert");
+        bar.setTitle("Select Expert");
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
