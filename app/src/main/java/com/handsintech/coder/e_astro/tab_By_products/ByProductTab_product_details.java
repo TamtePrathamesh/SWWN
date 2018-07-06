@@ -1,6 +1,7 @@
 package com.handsintech.coder.e_astro.tab_By_products;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -59,7 +60,7 @@ public class ByProductTab_product_details extends Fragment {
     ViewPagerAdapter viewPagerAdapter;
 
     private String request_url="https://socialworldwidenetwork.com/productview.php?product_id=";
-    ProgressBar pb;
+    ProgressDialog pb;
     String urls;
     String pro_detail_id="";
     public Button btn_askExpert;
@@ -103,7 +104,11 @@ View v;
 
         mViewPager=v.findViewById(R.id.by_protab_product_detail_viewPager);
         sliderImg = new ArrayList<>();
-        pb=v.findViewById(R.id.by_protab_product_detail_pb);
+        pb=new ProgressDialog(getActivity());
+        pb.setCancelable(false);
+        pb.setMessage("Loading");
+        pb.show();
+
 
         sliderDotspanel = (LinearLayout)v.findViewById(R.id.by_productTab_SliderDots);
 
@@ -171,7 +176,7 @@ View v;
                                    // JSONObject product = array.getJSONObject(i);
 
 
-                                    pb.setVisibility(View.GONE);
+                                    pb.dismiss();
 
                                     //adding the product to product list
                                     urls=array.getString("small_image");
@@ -219,7 +224,7 @@ View v;
 
 
                         } catch(JSONException e){
-                            pb.setVisibility(View.GONE);
+                            pb.dismiss();
                             //Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
                             Log.d("details",e.toString());
                         }
@@ -230,7 +235,7 @@ View v;
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        pb.setVisibility(View.GONE);
+                        pb.dismiss();
                         Toast.makeText(getContext(), "Request Timeout, Please try again.", Toast.LENGTH_SHORT).show();
 
                     }
